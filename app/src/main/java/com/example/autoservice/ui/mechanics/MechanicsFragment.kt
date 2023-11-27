@@ -4,10 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.ExpandableListAdapter
+import android.widget.ExpandableListView
+import android.widget.ExpandableListView.OnChildClickListener
+import android.widget.ExpandableListView.OnGroupClickListener
+import android.widget.SimpleExpandableListAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.autoservice.databinding.FragmentMechanicsBinding
+import com.example.autoservice.entities.Mechanic
+import com.example.autoservice.entities.Order
+
 
 class MechanicsFragment : Fragment() {
 
@@ -17,26 +24,62 @@ class MechanicsFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var listViewAdapter: MechanicsExpandableListViewAdapter
+    private lateinit var mechanicsList: List<Mechanic>
+    private lateinit var ordersMap: HashMap<Mechanic, List<Order>>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(MechanicsViewModel::class.java)
-
         _binding = FragmentMechanicsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = "%s".format(textView.text)
-        }
+        setupExpandableListView(binding)
+
+        val root: View = binding.root
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun setupExpandableListView(binding: FragmentMechanicsBinding){
+        val mechanicsListView: ExpandableListView = binding.mechanicsListView;
+
+        showList()
+
+        listViewAdapter = MechanicsExpandableListViewAdapter(
+            requireContext(),
+            mechanicsList,
+            ordersMap)
+        mechanicsListView.setAdapter(listViewAdapter)
+    }
+
+    fun showList(){
+        mechanicsList = ArrayList()
+        ordersMap = HashMap()
+
+        (mechanicsList as ArrayList<Mechanic>).add(
+            Mechanic(
+            "Илья", "Обабков", "Николаевич")
+        )
+        (mechanicsList as ArrayList<Mechanic>).add(
+            Mechanic(
+                "Денис", "Шадрин", "Борисович")
+        )
+
+        val order1 : MutableList<Order> = ArrayList()
+        order1.add(Order("Заказ 1"))
+        order1.add(Order("Заказ 2"))
+
+        val order2 : MutableList<Order> = ArrayList()
+        order2.add(Order("Заказ 1"))
+        order2.add(Order("Заказ 2"))
+
+        ordersMap[mechanicsList[0]] = order1
+        ordersMap[mechanicsList[1]] = order2
     }
 }

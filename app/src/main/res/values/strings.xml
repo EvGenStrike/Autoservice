@@ -6,5 +6,6 @@
     <string name="title_notifications">Уведомления</string>
     <string name="title_statistics">Статистика</string>
     <string name="title_profile">Профиль</string>
+    <string name="mechanics_name">Mechanics_name</string>
 
 </resources>
