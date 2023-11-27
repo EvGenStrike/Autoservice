@@ -30,7 +30,7 @@ class MechanicsFragment : Fragment() {
 
         val textView: TextView = binding.textDashboard
         dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            textView.text = "%s".format(textView.text)
         }
         return root
     }
