@@ -1,6 +1,8 @@
 package com.example.autoservice
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -19,21 +21,29 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
+        setupNavView()
+        setupActionBar()
+    }
 
+    fun setupNavView(){
+        val bottomNavigationView: BottomNavigationView = binding.bottomNavView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_orders,
                 R.id.navigation_mechanics,
-                R.id.navigation_notifications,
-                R.id.navigation_statistics,
                 R.id.navigation_profile
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        bottomNavigationView.setupWithNavController(navController)
+
+        bottomNavigationView.itemIconTintList = null
+    }
+
+    fun setupActionBar(){
+        val actionBar: ActionBar? = supportActionBar;
+        actionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.action_bar_background_color)))
     }
 }
