@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -10,19 +10,24 @@
         android:layout_height="wrap_content"
         android:text="Order_1"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/mechanics_list_item_order_rating"
-        android:focusable="false"
-        android:focusableInTouchMode="false">
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent">
     </TextView>
     
     <RatingBar
         android:id="@+id/mechanics_list_item_order_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:focusable="false"
-        android:focusableInTouchMode="false">
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:isIndicator="true"
+        android:progressTint="@color/yellow"
+        android:secondaryProgressTint="@color/yellow"
+        android:rating="2"
+        android:backgroundTint="@android:color/transparent"
+        android:progressBackgroundTint="@color/teal_200">
     </RatingBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

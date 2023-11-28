@@ -2,14 +2,18 @@ package com.example.autoservice.ui.mechanics
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
-import android.widget.ListAdapter
+import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
 import com.example.autoservice.R
 import com.example.autoservice.entities.Mechanic
 import com.example.autoservice.entities.Order
+import kotlin.random.Random
+
 
 class MechanicsExpandableListViewAdapter internal constructor(
     private val context: Context,
@@ -55,12 +59,14 @@ class MechanicsExpandableListViewAdapter internal constructor(
 
         if (convertView == null){
             val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = inflater.inflate(R.layout.mechanics_list_item, null)
+            convertView = inflater.inflate(com.example.autoservice.R.layout.mechanics_list_item, null)
         }
 
         val mechanicTextView = convertView!!.findViewById<TextView>(R.id.mechanics_list_item_name)
         mechanicTextView.setText(mechanic.getFullName())
 
+        val ratingBar = convertView.findViewById(R.id.mechanics_list_item_rating) as RatingBar
+        ratingBar.rating = (0..5).random().toFloat()
         return convertView
     }
 
@@ -81,6 +87,9 @@ class MechanicsExpandableListViewAdapter internal constructor(
 
         val orderTextView = convertView!!.findViewById<TextView>(R.id.mechanics_list_item_order_name)
         orderTextView.setText(order.orderName)
+
+        val ratingBar = convertView.findViewById(R.id.mechanics_list_item_order_rating) as RatingBar
+        ratingBar.rating = (0..5).random().toFloat()
 
         return convertView
     }

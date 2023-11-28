@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/mechanics_list_item_name"
@@ -11,8 +11,7 @@
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:text="@string/mechanics_name"
-        android:focusable="false"
-        android:focusableInTouchMode="false">
+        android:textColor="@color/white">
     </TextView>
 
     <RatingBar
@@ -21,7 +20,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/mechanics_list_item_name"
         android:focusable="false"
-        android:focusableInTouchMode="false">
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:isIndicator="true"
+        android:progressTint="@color/yellow"
+        android:secondaryProgressTint="@color/yellow"
+        android:rating="2"
+        android:backgroundTint="@android:color/transparent"
+        android:progressBackgroundTint="@color/teal_200">
     </RatingBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
