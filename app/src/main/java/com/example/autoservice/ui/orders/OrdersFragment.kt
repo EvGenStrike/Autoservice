@@ -38,7 +38,8 @@ class OrdersFragment : Fragment() {
         val modelsList = ArrayList<CurrentOrderViewModel>()
         val ordersList: MutableList<Order> = java.util.ArrayList()
 
-        val curOrder = Order("Иванов Иван Иванович",
+        val curOrder = Order("Заказ 1",
+            "Иванов Иван Иванович",
             "Волков Владимир Владимирович",
             "Audi Q8",
             "O111OO196",

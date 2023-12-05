@@ -4,16 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
-import android.widget.ExpandableListView.OnChildClickListener
-import android.widget.ExpandableListView.OnGroupClickListener
-import android.widget.SimpleExpandableListAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.autoservice.databinding.FragmentMechanicsBinding
-import com.example.autoservice.entities.Mechanic
-import com.example.autoservice.entities.Order
+import com.example.autoservice.ui.orders.Order
 
 
 class MechanicsFragment : Fragment() {
@@ -25,8 +19,7 @@ class MechanicsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var listViewAdapter: MechanicsExpandableListViewAdapter
-    private lateinit var mechanicsList: List<Mechanic>
-    private lateinit var ordersMap: HashMap<Mechanic, List<Order>>
+    private val mechanicsList: List<Mechanic> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,32 +46,101 @@ class MechanicsFragment : Fragment() {
 
         listViewAdapter = MechanicsExpandableListViewAdapter(
             requireContext(),
-            mechanicsList,
-            ordersMap)
+            mechanicsList)
         mechanicsListView.setAdapter(listViewAdapter)
     }
 
     private fun showList(){
-        mechanicsList = ArrayList()
-        ordersMap = HashMap()
-
-        addMechanic(Mechanic("Илья", "Обабков", "Николаевич"))
-
-        (mechanicsList as ArrayList<Mechanic>).add(
-            Mechanic(
-                "Денис", "Шадрин", "Борисович")
-        )
-
-        val order1 : MutableList<Order> = ArrayList()
-        order1.add(Order("Заказ 1"))
-        order1.add(Order("Заказ 2"))
-
-        val order2 : MutableList<Order> = ArrayList()
-        order2.add(Order("Заказ 1"))
-        order2.add(Order("Заказ 2"))
-
-        ordersMap[mechanicsList[0]] = order1
-        ordersMap[mechanicsList[1]] = order2
+        addMechanic(Mechanic(
+            "Илья", "Обабков", "Николаевич", 5,
+            listOf(
+                Order("Заказ 1",
+                    "Иванов Иван Иванович",
+                    "Волков Владимир Владимирович",
+                    "Audi Q8",
+                    "O111OO196",
+                    "CKO3437483HS",
+                    "Поменять резину",
+                    1230.0,
+                    "Биение в руль",
+                    "12.02.2023",
+                    "13.02.2023",
+                    "Комментарий",
+                    5),
+                Order("Заказ 2",
+                    "Иванов Иван Иванович",
+                    "Волков Владимир Владимирович",
+                    "Audi Q8",
+                    "O111OO196",
+                    "CKO3437483HS",
+                    "Поменять резину",
+                    1230.0,
+                    "Биение в руль",
+                    "12.02.2023",
+                    "13.02.2023",
+                    "Комментарий",
+                    4)
+            )))
+        addMechanic(Mechanic(
+            "Денис", "Шадрин", "Борисович", 3,
+            listOf(
+                Order("Заказ 1",
+                "Иванов Иван Иванович",
+                "Волков Владимир Владимирович",
+                "Audi Q8",
+                "O111OO196",
+                "CKO3437483HS",
+                "Поменять резину",
+                1230.0,
+                "Биение в руль",
+                "12.02.2023",
+                "13.02.2023",
+                "Комментарий",
+                3),
+                Order("Заказ 2",
+                    "Иванов Иван Иванович",
+                    "Волков Владимир Владимирович",
+                    "Audi Q8",
+                    "O111OO196",
+                    "CKO3437483HS",
+                    "Поменять резину",
+                    1230.0,
+                    "Биение в руль",
+                    "12.02.2023",
+                    "13.02.2023",
+                    "Комментарий",
+                    4)
+            )))
+        addMechanic(Mechanic(
+            "Дмитрий", "Соколов", "Борисович", 4,
+            listOf(
+                Order("Заказ 1",
+                    "Иванов Иван Иванович",
+                    "Волков Владимир Владимирович",
+                    "Audi Q8",
+                    "O111OO196",
+                    "CKO3437483HS",
+                    "Поменять резину",
+                    1230.0,
+                    "Биение в руль",
+                    "12.02.2023",
+                    "13.02.2023",
+                    "Комментарий",
+                    3),
+                Order("Заказ 2",
+                    "Иванов Иван Иванович",
+                    "Волков Владимир Владимирович",
+                    "Audi Q8",
+                    "O111OO196",
+                    "CKO3437483HS",
+                    "Поменять резину",
+                    1230.0,
+                    "Биение в руль",
+                    "12.02.2023",
+                    "13.02.2023",
+                    "Комментарий",
+                    4)
+            )))
     }
 
     private fun addMechanic(mechanic: Mechanic){

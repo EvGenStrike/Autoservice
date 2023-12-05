@@ -1,6 +1,7 @@
 package com.example.autoservice.ui.orders
 
 data class Order(
+    val orderName: String,
     val responsibleName: String,
     val clientName: String,
     val carModel: String,
@@ -11,7 +12,11 @@ data class Order(
     val descriptionProblem: String,
     val startWorkDate: String,
     val endWorkDate: String,
-    val comment: String
+    val comment: String,
+    var starsCount: Int = 0,
 ) : java.io.Serializable {
+    fun rateOrder(starsCount: Int){
+        this.starsCount = starsCount
+    }
 }
 
