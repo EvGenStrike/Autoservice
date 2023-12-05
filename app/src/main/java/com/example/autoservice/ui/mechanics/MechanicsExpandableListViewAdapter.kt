@@ -2,30 +2,25 @@ package com.example.autoservice.ui.mechanics
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.RatingBar
 import android.widget.TextView
-import android.widget.Toast
 import com.example.autoservice.R
-import com.example.autoservice.entities.Mechanic
-import com.example.autoservice.entities.Order
-import kotlin.random.Random
+import com.example.autoservice.ui.orders.Order
 
 
 class MechanicsExpandableListViewAdapter internal constructor(
     private val context: Context,
-    private val mechanicsList: List<Mechanic>,
-    private val ordersList: HashMap<Mechanic, List<Order>>
+    private val mechanicsList: List<Mechanic>
 ): BaseExpandableListAdapter() {
     override fun getGroupCount(): Int {
         return mechanicsList.size
     }
 
     override fun getChildrenCount(groupPosition: Int): Int {
-        return this.ordersList[this.mechanicsList[groupPosition]]!!.size
+        return this.mechanicsList[groupPosition].getOrders().size
     }
 
     override fun getGroup(groupPosition: Int): Any {
@@ -33,7 +28,7 @@ class MechanicsExpandableListViewAdapter internal constructor(
     }
 
     override fun getChild(groupPosition: Int, childPosition: Int): Any {
-        return ordersList[this.mechanicsList[groupPosition]]!![childPosition]
+        return this.mechanicsList[groupPosition].getOrders()[childPosition]
     }
 
     override fun getGroupId(groupPosition: Int): Long {
@@ -59,14 +54,14 @@ class MechanicsExpandableListViewAdapter internal constructor(
 
         if (convertView == null){
             val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = inflater.inflate(com.example.autoservice.R.layout.mechanics_list_item, null)
+            convertView = inflater.inflate(R.layout.mechanics_list_item, null)
         }
 
         val mechanicTextView = convertView!!.findViewById<TextView>(R.id.mechanics_list_item_name)
         mechanicTextView.setText(mechanic.getFullName())
 
         val ratingBar = convertView.findViewById(R.id.mechanics_list_item_rating) as RatingBar
-        ratingBar.rating = (0..5).random().toFloat()
+        ratingBar.rating = mechanic.starsCount.toFloat()
         return convertView
     }
 
@@ -89,7 +84,7 @@ class MechanicsExpandableListViewAdapter internal constructor(
         orderTextView.setText(order.orderName)
 
         val ratingBar = convertView.findViewById(R.id.mechanics_list_item_order_rating) as RatingBar
-        ratingBar.rating = (0..5).random().toFloat()
+        ratingBar.rating = order.starsCount.toFloat()
 
         return convertView
     }
