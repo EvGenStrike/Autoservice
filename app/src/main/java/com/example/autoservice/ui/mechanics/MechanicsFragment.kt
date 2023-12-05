@@ -46,7 +46,7 @@ class MechanicsFragment : Fragment() {
         _binding = null
     }
 
-    fun setupExpandableListView(binding: FragmentMechanicsBinding){
+    private fun setupExpandableListView(binding: FragmentMechanicsBinding){
         val mechanicsListView: ExpandableListView = binding.mechanicsListView;
 
         showList()
@@ -58,14 +58,12 @@ class MechanicsFragment : Fragment() {
         mechanicsListView.setAdapter(listViewAdapter)
     }
 
-    fun showList(){
+    private fun showList(){
         mechanicsList = ArrayList()
         ordersMap = HashMap()
 
-        (mechanicsList as ArrayList<Mechanic>).add(
-            Mechanic(
-            "Илья", "Обабков", "Николаевич")
-        )
+        addMechanic(Mechanic("Илья", "Обабков", "Николаевич"))
+
         (mechanicsList as ArrayList<Mechanic>).add(
             Mechanic(
                 "Денис", "Шадрин", "Борисович")
@@ -81,5 +79,9 @@ class MechanicsFragment : Fragment() {
 
         ordersMap[mechanicsList[0]] = order1
         ordersMap[mechanicsList[1]] = order2
+    }
+
+    private fun addMechanic(mechanic: Mechanic){
+        (mechanicsList as ArrayList<Mechanic>).add(mechanic)
     }
 }

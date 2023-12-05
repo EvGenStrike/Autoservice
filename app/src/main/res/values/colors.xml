@@ -12,4 +12,5 @@
     <color name="nav_menu_background_color_selected">#B5B5B5</color>
     <color name="menu_background_color">#474747</color>
     <color name="action_bar_background_color">#3C3C3C</color>
+    <color name="mechanics_list_view_separator_color">#E6D21F</color>
 </resources>
