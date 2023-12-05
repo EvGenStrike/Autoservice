@@ -8,4 +8,17 @@
     <string name="title_profile">Профиль</string>
     <string name="mechanics_name">Mechanics_name</string>
 
+    <string name="title_new_orders">Заказ №</string>
+    <string name="current_orders_responsible">Ответственный:</string>
+    <string name="current_orders_client">Клиент:</string>
+    <string name="current_orders_client_car_model">Марка и модель автомобиля:</string>
+    <string name="current_orders_client_car_number">Номер автомобиля:</string>
+    <string name="current_orders_client_car_vin">VIN - номер:</string>
+    <string name="current_orders_client_service">Услуга:</string>
+    <string name="current_orders_client_service_cost">Стоимость услуги:</string>
+    <string name="current_orders_client_description_problem">Описание проблемы:</string>
+    <string name="current_orders_start_work">Начало работы:</string>
+    <string name="current_orders_end_work">Примерная дата окончания работ:</string>
+    <string name="current_orders_comment">Комментарий:</string>
+
 </resources>
