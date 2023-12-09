@@ -4,17 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ExpandableListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.autoservice.databinding.FragmentMechanicsBinding
 import com.example.autoservice.databinding.FragmentOrdersBinding
+import com.example.autoservice.databinding.FragmentProfileBinding
+import com.example.autoservice.ui.mechanics.MechanicsExpandableListViewAdapter
+import com.example.autoservice.ui.orders.CurrentOrderViewModel
+import com.example.autoservice.ui.orders.Order
+import com.example.autoservice.ui.orders.OrderAdapter
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentOrdersBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(

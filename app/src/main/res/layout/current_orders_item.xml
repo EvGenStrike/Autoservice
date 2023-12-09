@@ -14,288 +14,298 @@
 
 
     <LinearLayout
+        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linear_layout"
         android:orientation="vertical"
         android:paddingStart="20sp"
         android:paddingEnd="20sp">
 
-            <TextView
-                android:id="@+id/order_title"
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:gravity="center"
-                android:text="@string/title_new_orders"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+        <TextView
+            android:id="@+id/order_title"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/title_new_orders"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/expandable_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/expandable_layout"
             android:layout_marginBottom="12sp"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/responsible_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/current_orders_responsible"
-                    android:textSize="@dimen/current_order_text_title"
                     android:textColor="@color/current_orders_title_text_color"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="@dimen/current_order_text_title" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/responsible_text"
-                    android:textColor="@color/black"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textSize="@dimen/current_order_text"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/current_order_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/client_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/current_orders_client"
                     android:textColor="@color/current_orders_title_text_color"
-                    android:textSize="@dimen/current_order_text_title"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="@dimen/current_order_text_title" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/client_text"
-                    android:textColor="@color/black"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textSize="@dimen/current_order_text"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/current_order_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/car_model_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/current_orders_client_car_model"
                     android:textColor="@color/current_orders_title_text_color"
-                    android:textSize="@dimen/current_order_text_title"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="@dimen/current_order_text_title" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/car_model_text"
-                    android:textColor="@color/black"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textSize="@dimen/current_order_text"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/current_order_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/car_number_title"
-                    android:textColor="@color/current_orders_title_text_color"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/current_orders_client_car_number"
-                    android:textSize="@dimen/current_order_text_title"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/current_orders_title_text_color"
+                    android:textSize="@dimen/current_order_text_title" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/car_number_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="@dimen/current_order_text"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="@dimen/current_order_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/car_vin_title"
-                    android:textColor="@color/current_orders_title_text_color"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/current_orders_client_car_vin"
-                    android:textSize="@dimen/current_order_text_title"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/current_orders_title_text_color"
+                    android:textSize="@dimen/current_order_text_title" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/car_vin_text"
-                    android:textColor="@color/black"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textSize="@dimen/current_order_text"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/current_order_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/service_title"
-                    android:textColor="@color/current_orders_title_text_color"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/current_orders_client_service"
-                    android:textSize="@dimen/current_order_text_title"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/current_orders_title_text_color"
+                    android:textSize="@dimen/current_order_text_title" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/service_text"
-                    android:textColor="@color/black"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textSize="@dimen/current_order_text"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/current_order_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/cost_title"
-                    android:textColor="@color/current_orders_title_text_color"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/current_orders_client_service_cost"
-                    android:textSize="@dimen/current_order_text_title"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/current_orders_title_text_color"
+                    android:textSize="@dimen/current_order_text_title" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
                     android:id="@+id/cost_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textSize="@dimen/current_order_text"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/current_order_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/description_problem_title"
-                    android:textColor="@color/current_orders_title_text_color"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/current_orders_client_description_problem"
-                    android:textSize="@dimen/current_order_text_title"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/current_orders_title_text_color"
+                    android:textSize="@dimen/current_order_text_title" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/description_problem_text"
-                    android:textColor="@color/black"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textSize="@dimen/current_order_text"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/current_order_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/start_work_title"
-                    android:textColor="@color/current_orders_title_text_color"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/current_orders_start_work"
-                    android:textSize="@dimen/current_order_text_title"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/current_orders_title_text_color"
+                    android:textSize="@dimen/current_order_text_title" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/start_work_text"
-                    android:textColor="@color/black"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textSize="@dimen/current_order_text"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/current_order_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/end_work_title"
-                    android:textColor="@color/current_orders_title_text_color"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/current_orders_end_work"
-                    android:textSize="@dimen/current_order_text_title"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/current_orders_title_text_color"
+                    android:textSize="@dimen/current_order_text_title" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/end_work_text"
-                    android:textColor="@color/black"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textSize="@dimen/current_order_text"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/current_order_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/comment_title"
-                    android:textColor="@color/current_orders_title_text_color"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/current_orders_comment"
-                    android:textSize="@dimen/current_order_text_title"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/current_orders_title_text_color"
+                    android:textSize="@dimen/current_order_text_title" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/comment_text"
-                    android:textColor="@color/black"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textSize="@dimen/current_order_text"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/current_order_text" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
