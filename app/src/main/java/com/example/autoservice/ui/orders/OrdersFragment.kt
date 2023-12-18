@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -36,7 +37,8 @@ class OrdersFragment : Fragment() {
             textView.text = it
         }
         val modelsList = ArrayList<CurrentOrderViewModel>()
-        val ordersList: MutableList<Order> = java.util.ArrayList()
+        val currentOrdersList: MutableList<Order> = java.util.ArrayList()
+        val newOrdersList = ArrayList<Order>()
 
         val curOrder = Order("Заказ 1",
             "Иванов Иван Иванович",
@@ -50,13 +52,31 @@ class OrdersFragment : Fragment() {
             "12.02.2023",
             "13.02.2023",
             "Комментарий")
-        ordersList.add(curOrder)
+        currentOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
         modelsList.add(CurrentOrderViewModel(curOrder))
         modelsList.add(CurrentOrderViewModel(curOrder))
         parentRecyclerView = binding.parentRecyclerView
         parentRecyclerView.layoutManager = LinearLayoutManager(context)
-        val adapter = OrderAdapter(modelsList)
-        parentRecyclerView.adapter = adapter
+        val adapterCurrentOrders = OrderAdapter(modelsList)
+        parentRecyclerView.adapter = adapterCurrentOrders
+        
+        val adapterNewOrders = context?.let { NewOrdersListAdapter(it, newOrdersList) }
+        binding.newOrdersList.adapter = adapterNewOrders
+        binding.newOrdersCountText.text = newOrdersList.size.toString()
+
+        val newOrders = binding.newOrdersCardView
+        newOrders.setOnClickListener {
+            val visibilityExpandableLayout =
+                if (binding.newOrdersExpandableLayout.visibility == View.GONE) View.VISIBLE
+                else View.GONE
+            val visibilityCountText =
+                if (binding.newOrdersExpandableLayout.visibility == View.GONE) View.GONE
+                else View.VISIBLE
+            binding.newOrdersExpandableLayout.visibility = visibilityExpandableLayout
+            binding.newOrdersCountText.visibility = visibilityCountText
+        }
         return root
     }
 
@@ -64,4 +84,5 @@ class OrdersFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

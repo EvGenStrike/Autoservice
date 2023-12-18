@@ -8,7 +8,7 @@
     <string name="title_profile">Профиль</string>
     <string name="mechanics_name">Mechanics_name</string>
 
-    <string name="title_new_orders">Заказ №</string>
+    <string name="current_orders_title">Заказ №</string>
     <string name="current_orders_responsible">Ответственный:</string>
     <string name="current_orders_client">Клиент:</string>
     <string name="current_orders_client_car_model">Марка и модель автомобиля:</string>
@@ -20,5 +20,8 @@
     <string name="current_orders_start_work">Начало работы:</string>
     <string name="current_orders_end_work">Примерная дата окончания работ:</string>
     <string name="current_orders_comment">Комментарий:</string>
+    
+    <string name="new_orders_title">Новые заказы</string>
+    <string name="completed_orders_title">История выполненных заказов</string>
 
 </resources>

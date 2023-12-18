@@ -12,6 +12,8 @@ import com.example.autoservice.databinding.ActivityMainBinding
 class Registration: AppCompatActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
+            val intent = Intent (this, MainActivity::class.java)
+            startActivity(intent)
             setContentView(R.layout.registration_main)
 
             val userLogin: EditText = findViewById(R.id.user_login)
