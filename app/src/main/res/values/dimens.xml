@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="current_order_text_title">18sp</dimen>
     <dimen name="current_order_text">18sp</dimen>
+    <dimen name="padding_main_fragment">10sp</dimen>
 </resources>

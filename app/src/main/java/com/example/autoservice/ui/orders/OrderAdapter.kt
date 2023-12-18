@@ -40,7 +40,8 @@ class OrderAdapter(mList: List<CurrentOrderViewModel>) :
             field.isAccessible = true
             val value = field.get(curOrder)?.toString() ?: "Нет данных"
             holder.orderTextViews.forEach { textView ->
-                val idName = holder.itemView.context.resources.getResourceName(textView.id).lowercase()
+                val idName =
+                    holder.itemView.context.resources.getResourceName(textView.id).lowercase()
                 val fieldName = field.name.lowercase().let {
                     if (it.contains("car")) it.replace("car", "") else it
                 }
@@ -56,6 +57,11 @@ class OrderAdapter(mList: List<CurrentOrderViewModel>) :
         }
         val isExpandable: Boolean = model.isExpandable
         holder.expandableLayout.visibility = if (isExpandable) View.VISIBLE else View.GONE
+
+        val backColor =
+            if (model.isExpandable) holder.linearLayout.context.getColor(R.color.current_orders_open_background_color) else
+                holder.linearLayout.context.getColor(R.color.white)
+        holder.linearLayout.setBackgroundColor(backColor)
 
         holder.linearLayout.setOnClickListener {
             model.isExpandable = (!model.isExpandable)
