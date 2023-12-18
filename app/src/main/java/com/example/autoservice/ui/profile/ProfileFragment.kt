@@ -20,7 +20,7 @@ import com.example.autoservice.ui.orders.OrderAdapter
 
 class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentOrdersBinding? = null
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -31,13 +31,9 @@ class ProfileFragment : Fragment() {
         val homeViewModel =
             ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        _binding = FragmentOrdersBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 
