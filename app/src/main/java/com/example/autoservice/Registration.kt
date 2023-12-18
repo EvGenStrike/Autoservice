@@ -35,7 +35,7 @@ class Registration: AppCompatActivity() {
                 if (login == "" || pass == "" || phone == "")
                     Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
                 else{
-                    val user = User(login, phone, pass)
+                    val user = User(login, pass, phone)
 
                     val db = DbHelper(this, null)
                     db.addUser(user)
