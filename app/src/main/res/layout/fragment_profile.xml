@@ -5,75 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment"
-    android:background="#474747">
+    android:background="#474747"
+    android:paddingStart = "@dimen/padding_profile_fragment"
+    android:paddingEnd ="@dimen/padding_profile_fragment"
+    >
 
     <ImageView
-        android:id="@+id/img_profile"
-        android:layout_width="125dp"
-        android:layout_height="121dp"
-        android:src="@drawable/ic_profile_black_24dp"
-        tools:layout_editor_absoluteX="256dp"
-        tools:layout_editor_absoluteY="101dp" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="60dp"
-        android:layout_height="47dp"
-        android:src="@drawable/car_image_logo"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="1dp" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="272dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_app_logo"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="1dp" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="207dp"
-        android:layout_height="179dp"
-        android:src="@drawable/circle"
-        tools:layout_editor_absoluteX="213dp"
-        tools:layout_editor_absoluteY="78dp" />
-
-    <TextView
-        android:id="@+id/name_profile"
-        android:layout_width="133dp"
-        android:layout_height="31dp"
-        android:text="Егор механик"
-        android:textColor="#FFFFFF"
-        android:textSize="19sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="213dp" />
-
-    <Button
-        android:id="@+id/skills"
-        android:layout_width="410dp"
-        android:layout_height="83dp"
-        android:background="#474747"
-        android:backgroundTint="#474747"
-        android:text="Навыки"
-        android:textSize="25dp"
+        android:id="@+id/profile_fragment_profile_picture"
+        android:layout_width="120sp"
+        android:layout_height="120sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/line"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="250dp" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/line"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="340dp" />
+        android:src="@drawable/circular_bordered_image"
+        >
+    </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
