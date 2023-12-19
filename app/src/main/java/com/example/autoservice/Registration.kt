@@ -8,12 +8,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.autoservice.databinding.ActivityMainBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class Registration: AppCompatActivity() {
+
+    private lateinit var dbRef: DatabaseReference
+
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            val intent = Intent (this, MainActivity::class.java)
-            startActivity(intent)
+
             setContentView(R.layout.registration_main)
 
             val userLogin: EditText = findViewById(R.id.user_login)
@@ -21,6 +25,8 @@ class Registration: AppCompatActivity() {
             val userPhone: EditText = findViewById(R.id.user_telephone)
             val button: Button = findViewById(R.id.button_reg)
             val linkToAuth: TextView = findViewById(R.id.link_to_auth)
+
+            dbRef = FirebaseDatabase.getInstance().getReference("User")
 
             linkToAuth.setOnClickListener {
                 val intent = Intent(this, AuthActivity::class.java)
@@ -37,11 +43,15 @@ class Registration: AppCompatActivity() {
                 if (login == "" || pass == "" || phone == "")
                     Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
                 else{
-                    val user = User(login, pass, phone)
+                    val userId = dbRef.push().key!!
 
-                    val db = DbHelper(this, null)
-                    db.addUser(user)
-                    Toast.makeText(this, "Пользователь $login добавлен", Toast.LENGTH_LONG).show()
+                    val user = User(userId, login, pass, phone )
+                    dbRef.child(userId).setValue(user)
+                        .addOnCompleteListener{
+                            Toast.makeText(this, "Пользователь $login добавлен", Toast.LENGTH_LONG).show()
+                        }.addOnFailureListener{err->
+                            Toast.makeText(this, "Ошибка ${err.message} ", Toast.LENGTH_LONG).show()
+                        }
 
                     userLogin.text.clear()
                     userPass.text.clear()
