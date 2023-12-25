@@ -57,8 +57,11 @@ class MechanicsExpandableListViewAdapter internal constructor(
             convertView = inflater.inflate(R.layout.mechanics_list_item, null)
         }
 
-        val mechanicTextView = convertView!!.findViewById<TextView>(R.id.mechanics_list_item_name)
-        mechanicTextView.setText(mechanic.getFullName())
+        val mechanicNameTextView = convertView!!.findViewById<TextView>(R.id.mechanics_list_item_name)
+        mechanicNameTextView.setText(mechanic.getFullName())
+
+        val mechanicPhoneTextView = convertView.findViewById<TextView>(R.id.mechanics_list_item_phone)
+        mechanicPhoneTextView.setText(mechanic.phone)
 
         val ratingBar = convertView.findViewById(R.id.mechanics_list_item_rating) as RatingBar
         ratingBar.rating = mechanic.starsCount.toFloat()

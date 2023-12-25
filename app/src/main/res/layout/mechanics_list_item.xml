@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingStart="10sp"
+    android:paddingEnd="10sp">
 
     <TextView
         android:id="@+id/mechanics_list_item_name"
@@ -14,11 +16,21 @@
         android:textColor="@color/white">
     </TextView>
 
+    <TextView
+        android:id="@+id/mechanics_list_item_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/mechanics_list_item_name"
+        android:textSize="24sp"
+        android:text="@string/mechanics_phone"
+        android:textColor="@color/light_grey">
+    </TextView>
+
     <RatingBar
         android:id="@+id/mechanics_list_item_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/mechanics_list_item_name"
+        app:layout_constraintTop_toBottomOf="@id/mechanics_list_item_phone"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:clickable="false"
@@ -27,7 +39,12 @@
         android:secondaryProgressTint="@color/yellow"
         android:rating="2"
         android:backgroundTint="@android:color/transparent"
-        android:progressBackgroundTint="@color/teal_200">
+        android:progressBackgroundTint="@color/teal_200"
+        android:scaleX=".7"
+        android:scaleY=".7"
+        android:transformPivotX="0dp"
+        android:transformPivotY="30dp"
+        >
     </RatingBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

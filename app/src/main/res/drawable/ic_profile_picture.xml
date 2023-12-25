@@ -5,9 +5,13 @@
     android:height="420dp">
     <path
         android:pathData="M412.5 210A202.5 202.5 0 0 1 7.5 210A202.5 202.5 0 0 1 412.5 210Z"
+<<<<<<< HEAD
         android:fillColor="#777575"
         android:strokeColor="#FFE818"
         android:strokeWidth="15" />
+=======
+        android:fillColor="#777575" />
+>>>>>>> master
     <path
         android:pathData="M264 142.5A54 49.5 0 0 1 156 142.5A54 49.5 0 0 1 264 142.5Z"
         android:fillColor="#F2F2F2" />

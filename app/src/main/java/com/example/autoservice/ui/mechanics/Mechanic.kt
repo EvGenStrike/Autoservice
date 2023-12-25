@@ -6,6 +6,7 @@ class Mechanic(
     private val firstName: String,
     private val lastName: String,
     private val patronymic: String,
+    public val phone: String,
     private val _starsCount: Int = 0,
     private val orders: List<Order> = ArrayList()
 ){

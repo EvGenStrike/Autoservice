@@ -52,7 +52,8 @@ class MechanicsFragment : Fragment() {
 
     private fun showList(){
         addMechanic(Mechanic(
-            "Илья", "Обабков", "Николаевич", 5,
+            "Илья", "Обабков", "Николаевич",
+            "+79001989301", 5,
             listOf(
                 Order("Заказ 1",
                     "Иванов Иван Иванович",
@@ -82,7 +83,8 @@ class MechanicsFragment : Fragment() {
                     4)
             )))
         addMechanic(Mechanic(
-            "Денис", "Шадрин", "Борисович", 3,
+            "Денис", "Шадрин", "Борисович",
+            "+793247118503", 3,
             listOf(
                 Order("Заказ 1",
                 "Иванов Иван Иванович",
@@ -112,7 +114,8 @@ class MechanicsFragment : Fragment() {
                     4)
             )))
         addMechanic(Mechanic(
-            "Дмитрий", "Соколов", "Борисович", 4,
+            "Дмитрий", "Соколов", "Борисович",
+            "+79385019571", 4,
             listOf(
                 Order("Заказ 1",
                     "Иванов Иван Иванович",
