@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.autoservice.R
 
-class NewOrdersListAdapter(
+class CompletedOrdersListAdapter(
     private val context: Context,
     private val ordersList: java.util.ArrayList<Order>
 ) : BaseAdapter() {
@@ -32,12 +32,26 @@ class NewOrdersListAdapter(
         var convertView = convertView
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(
-                R.layout.new_orders_list_item,
+                R.layout.completed_orders_list_item,
                 parent,
                 false
             )
+
+            val expandableLayout: LinearLayout =
+                convertView?.findViewById(R.id.test) as LinearLayout
+            convertView.setOnClickListener {
+                expandableLayout.visibility =
+                    if (expandableLayout.visibility == View.GONE) View.VISIBLE
+                    else View.GONE
+            }
         }
+
+        val countOrdersText: TextView =
+            convertView?.findViewById(R.id.order_number_text) as TextView
+        countOrdersText.text = "Заказ №%s".format(position + 1)
+
         return convertView
     }
 
 }
+
