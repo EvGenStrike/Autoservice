@@ -45,12 +45,12 @@
         android:textColor="#fdfdfd"/>
 
     <EditText
-        android:id="@+id/user_telephone"
+        android:id="@+id/user_email"
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="Введите номер телефона"
+        android:hint="Введите email"
         android:textColorHint="#6a6a6a"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"

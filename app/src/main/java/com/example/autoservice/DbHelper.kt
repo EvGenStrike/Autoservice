@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import android.widget.Toast
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 
 class DbHelper(val context: Context, var factory: SQLiteDatabase.CursorFactory?) :
@@ -22,23 +24,11 @@ class DbHelper(val context: Context, var factory: SQLiteDatabase.CursorFactory?)
         onCreate(db)
     }
 
-    fun addUser(user: User){
-        val values = ContentValues()
-        values.put("login",user.login)
-        values.put("pass",user.pass)
-        values.put("phone",user.phone)
-
-        val db = this.writableDatabase
-        db.insert("users",null, values)
-
-        db.close()
-    }
-    fun getUser(pass: String, phone: String): Boolean{
-        val db = this.readableDatabase
-        var a = tableToString(db, "users")
-        val result = db.rawQuery("SELECT * FROM users WHERE phone = '$phone' AND pass = '$pass'",null)
-        return result.moveToFirst()
-    }
+//    fun getUser(pass: String, phone: String): Boolean{
+//        val result = FirebaseDatabase.getInstance().getReference(("User/$phone"))
+//            return (result != null);
+//
+//    }
 
     fun tableToString(db: SQLiteDatabase, tableName: String): String? {
         Log.d("", "tableToString called")
@@ -66,5 +56,4 @@ class DbHelper(val context: Context, var factory: SQLiteDatabase.CursorFactory?)
         }
         return cursorString
     }
-
 }
