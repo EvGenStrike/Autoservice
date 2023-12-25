@@ -1,156 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/new_order_item"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="22dp"
-    android:paddingBottom="20dp"
-    android:orientation="horizontal">
+    android:layout_margin="10dp"
+    android:minHeight="70dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/client_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/current_orders_client"
-            android:textColor="@color/current_orders_title_text_color"
-            android:textSize="@dimen/current_order_text_title" />
-
-        <TextView
-            android:id="@+id/client_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/current_order_text" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/car_model_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/current_orders_client_car_model"
-            android:textColor="@color/current_orders_title_text_color"
-            android:textSize="@dimen/current_order_text_title" />
-
-        <TextView
-            android:id="@+id/car_model_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/current_order_text"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/car_number_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/current_orders_client_car_number"
-            android:textColor="@color/current_orders_title_text_color"
-            android:textSize="@dimen/current_order_text_title" />
-
-        <TextView
-            android:id="@+id/car_number_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/current_order_text" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/service_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/current_orders_client_service"
-            android:textColor="@color/current_orders_title_text_color"
-            android:textSize="@dimen/current_order_text_title" />
-
-        <TextView
-            android:id="@+id/service_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/current_order_text" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/cost_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/current_orders_client_service_cost"
-            android:textColor="@color/current_orders_title_text_color"
-            android:textSize="@dimen/current_order_text_title" />
-
-        <TextView
-            android:id="@+id/cost_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/current_order_text" />
-    </LinearLayout>
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/completed_order_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20sp">
+        android:paddingTop="22dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10sp"
+            android:src="@drawable/yellow_dot" />
 
         <TextView
-            android:id="@+id/responsible_title"
+            android:id="@+id/order_number_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10sp"
             android:layout_weight="1"
-            android:text="@string/current_orders_responsible"
-            android:textColor="#C7B61C"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/responsible_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
+            android:text="@string/current_orders_title"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/mechanics_name_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="50sp"
+            android:layout_weight="1"
+            android:text="ФИО"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20sp"
+            android:src="@drawable/ic_profile_picture" />
+
     </LinearLayout>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_margin="12dp"
+        app:layout_constraintTop_toBottomOf="@id/completed_order_item">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="#D2C018"
+            app:layout_constraintBottom_toTopOf="@+id/test"/>
+
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            android:progressTint="@color/yellow"
+            android:secondaryProgressTint="@color/yellow"
+            android:progressBackgroundTint="@color/teal_200"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/service_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/current_orders_client_service"
+                android:textColor="@color/current_orders_title_text_color"
+                android:textSize="@dimen/current_order_text_title" />
+
+            <TextView
+                android:id="@+id/service_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/current_order_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/cost_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/current_orders_client_service_cost"
+                android:textColor="@color/current_orders_title_text_color"
+                android:textSize="@dimen/current_order_text_title" />
+
+            <TextView
+                android:id="@+id/cost_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/current_order_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/review_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Отзыв клиента:"
+                android:textColor="@color/current_orders_title_text_color"
+                android:textSize="@dimen/current_order_text_title" />
+
+            <TextView
+                android:id="@+id/review_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/current_order_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/income_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Доход:"
+                android:textColor="@color/current_orders_title_text_color"
+                android:textSize="@dimen/current_order_text_title" />
+
+            <TextView
+                android:id="@+id/income_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/current_order_text" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="12dp"
+            android:id="@+id/roundedTransparentYellowButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Отчёт"
+            android:textColor="@color/black"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/review_background"
+        />
+
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
