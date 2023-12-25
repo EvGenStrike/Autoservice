@@ -16,6 +16,10 @@ class Registration: AppCompatActivity() {
     private lateinit var dbRef: DatabaseReference
 
         override fun onCreate(savedInstanceState: Bundle?) {
+            //временно
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+
             super.onCreate(savedInstanceState)
 
             setContentView(R.layout.registration_main)

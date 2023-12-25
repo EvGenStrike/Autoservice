@@ -21,13 +21,13 @@ class AuthActivity : AppCompatActivity() {
         linkToReg.setOnClickListener {
             val intent = Intent(this, Registration::class.java)
             startActivity(intent)
-            //aa
         }
 
 
         button.setOnClickListener {
             val pass = userPass.text.toString().trim()
             val phone = userPhone.text.toString().trim()
+
 
 
             if (pass == "" || phone == "")
