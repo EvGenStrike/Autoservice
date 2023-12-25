@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
+private lateinit var auth: FirebaseAuth
 
 class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,40 +25,25 @@ class AuthActivity : AppCompatActivity() {
             val intent = Intent(this, Registration::class.java)
             startActivity(intent)
         }
-        val firebaseAuth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
 
         button.setOnClickListener {
             val pass = userPass.text.toString().trim()
             val email = userEmail.text.toString().trim()
 
-            if (pass == "" || email == "")
-                Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
-            else{
-                firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(){
-                    if(it.isSuccessful){
+            if (email.isNotEmpty()&& pass.isNotEmpty())
+                auth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(){task->
+                    if(task.isSuccessful){
                         Toast.makeText(this, "Пользователь авторизовон", Toast.LENGTH_LONG).show()
                         userPass.text.clear()
                         userEmail.text.clear()
                         val intent = Intent (this, MainActivity::class.java)
                         startActivity(intent)
-                    }else{
-                        Toast.makeText(this, "Пользователь не авторизовон", Toast.LENGTH_LONG).show()
-                    }
+                    }else{Toast.makeText(this, "Пользователь не авторизовон", Toast.LENGTH_LONG).show()}
                 }
-/*                val db = DbHelper(this, null)
-                val isAuth = db.getUser(pass, email)
-
-                if (isAuth){
-                    Toast.makeText(this, "Пользователь авторизовон", Toast.LENGTH_LONG).show()
-                    userPass.text.clear()
-                    userEmail.text.clear()
-
-                    val intent = Intent (this, MainActivity::class.java)
-                    startActivity(intent)*/
+            else{
+                Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
             }
-                /*else
-                    Toast.makeText(this, "Пользователь не авторизовон", Toast.LENGTH_LONG).show()*/
-
         }
 
     }
