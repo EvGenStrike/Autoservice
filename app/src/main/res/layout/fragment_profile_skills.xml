@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.profile.ProfileFragment"
+    android:background="#474747"
+    android:id="@+id/profile_fragment_skills_constraint_layout"
+    android:paddingStart="@dimen/padding_profile_fragment"
+    android:paddingEnd="@dimen/padding_profile_fragment"
+    android:paddingTop="@dimen/padding_profile_fragment"
+    android:paddingBottom="@dimen/padding_profile_fragment"
+    >
+
+    <TextView
+        android:id="@+id/skills_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Мои навыки"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_profile_fragment"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+    </TextView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/new_orders_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:minHeight="50dp"
+        app:cardBackgroundColor="@color/menu_background_color"
+        app:cardCornerRadius="12dp"
+        app:strokeColor="@color/light_yellow"
+        app:strokeWidth="4dp"
+        android:animateLayoutChanges="true"
+        app:layout_constraintTop_toBottomOf="@id/skills_text_view"
+        android:layout_marginTop="@dimen/padding_profile_fragment"
+        >
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:paddingTop="5dp"
+            android:paddingStart="20sp"
+            android:paddingEnd="20sp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Навыки"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_profile_fragment"
+                >
+            </TextView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/new_orders_expandable_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="12sp"
+            android:orientation="vertical"
+            android:padding="10sp"
+            android:visibility="gone"
+            android:animateLayoutChanges="true"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="150dp"
+                android:text="подробная информация"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_profile_fragment"
+                >
+            </TextView>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/skills_new_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_add_skill"
+        app:tint="@color/yellow"
+        app:backgroundTint="@color/action_bar_background_color"
+        app:elevation="0dp"
+        >
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

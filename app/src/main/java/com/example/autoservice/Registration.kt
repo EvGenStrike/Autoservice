@@ -7,6 +7,11 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -17,6 +22,9 @@ class Registration: AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.registration_main)
 
@@ -24,6 +32,22 @@ class Registration: AppCompatActivity() {
 
         val linkToAuth:TextView = findViewById(R.id.link_to_auth)
         createUser()
+
+//        fun setupNavView(){
+//            val bottomNavigationView: BottomNavigationView = binding.bottomNavView
+//            val navController = findNavController(R.id.nav_host_fragment_activity_main)
+//            val appBarConfiguration = AppBarConfiguration(
+//                setOf(
+//                    R.id.navigation_orders,
+//                    R.id.navigation_mechanics,
+//                    R.id.navigation_profile
+//                )
+//            )
+//            setupActionBarWithNavController(navController, appBarConfiguration)
+//            bottomNavigationView.setupWithNavController(navController)
+//
+//            bottomNavigationView.itemIconTintList = null
+//        }
 
         linkToAuth.setOnClickListener {
             val intent = Intent(this, AuthActivity::class.java)

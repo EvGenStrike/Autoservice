@@ -6,6 +6,8 @@
     <string name="title_notifications">Уведомления</string>
     <string name="title_statistics">Статистика</string>
     <string name="title_profile">Профиль</string>
+    <string name="title_profile_skills">Навыки</string>
+    <string name="title_profile_mechanics">Механики</string>
 
     <string name="mechanics_name">Mechanics_name</string>
     <string name="mechanics_phone">+79999999999</string>
