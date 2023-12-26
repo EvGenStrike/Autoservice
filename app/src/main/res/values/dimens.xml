@@ -6,4 +6,5 @@
     <dimen name="current_order_text">18sp</dimen>
     <dimen name="padding_main_fragment">10sp</dimen>
     <dimen name="padding_profile_fragment">20sp</dimen>
+    <dimen name="text_size_profile_fragment">24sp</dimen>
 </resources>
