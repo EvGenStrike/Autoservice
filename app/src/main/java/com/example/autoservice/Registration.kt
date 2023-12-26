@@ -7,7 +7,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.autoservice.databinding.ActivityAuthBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -47,14 +46,13 @@ class Registration: AppCompatActivity() {
                 firebaseAuth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            dbRef = FirebaseDatabase.getInstance().getReference("User")
+                            dbRef = FirebaseDatabase.getInstance().getReference("Users")
                             val userId = dbRef.push().key!!
                             val user = User(userId, login, pass, email)
                             dbRef.child(userId).setValue(user)
                                 .addOnCompleteListener {
                                     Toast.makeText(this, "Пользователь $login добавлен", Toast.LENGTH_LONG).show()
                                 }
-                            Toast.makeText(this, "Пользователь добавлен", Toast.LENGTH_LONG).show()
                             userLogin.text.clear()
                             userPass.text.clear()
                             userEmail.text.clear()
