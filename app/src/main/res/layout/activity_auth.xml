@@ -22,13 +22,13 @@
         android:textSize="25sp" />
 
     <EditText
-        android:id="@+id/user_telephone"
+        android:id="@+id/user_email"
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Введите номер телефона"
+        android:hint="Введите email"
         android:inputType="text"
         android:textColor="#fdfdfd"
         android:textColorHint="#6a6a6a" />

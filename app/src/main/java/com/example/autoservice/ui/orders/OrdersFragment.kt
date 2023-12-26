@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -55,6 +56,28 @@ class OrdersFragment : Fragment() {
         currentOrdersList.add(curOrder)
         newOrdersList.add(curOrder)
         newOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
+
+        newOrdersList.add(curOrder)
+        newOrdersList.add(curOrder)
+        modelsList.add(CurrentOrderViewModel(curOrder))
+        modelsList.add(CurrentOrderViewModel(curOrder))
+        modelsList.add(CurrentOrderViewModel(curOrder))
+        modelsList.add(CurrentOrderViewModel(curOrder))
+        modelsList.add(CurrentOrderViewModel(curOrder))
+        modelsList.add(CurrentOrderViewModel(curOrder))
+        modelsList.add(CurrentOrderViewModel(curOrder))
+        modelsList.add(CurrentOrderViewModel(curOrder))
+        modelsList.add(CurrentOrderViewModel(curOrder))
+        modelsList.add(CurrentOrderViewModel(curOrder))
         modelsList.add(CurrentOrderViewModel(curOrder))
         modelsList.add(CurrentOrderViewModel(curOrder))
         parentRecyclerView = binding.parentRecyclerView
@@ -76,6 +99,18 @@ class OrdersFragment : Fragment() {
                 else View.VISIBLE
             binding.newOrdersExpandableLayout.visibility = visibilityExpandableLayout
             binding.newOrdersCountText.visibility = visibilityCountText
+        }
+
+        binding.completedOrdersList.adapter =
+            context?.let { CompletedOrdersListAdapter(it, newOrdersList) }
+        val completedOrders = binding.completedOrdersCardView
+        var originalScrollPosition = 0
+        completedOrders.setOnClickListener {
+            val visibilityExpandableLayout =
+                if (binding.completedOrdersExpandableLayout.visibility == View.GONE) View.VISIBLE
+                else View.GONE
+            binding.completedOrdersExpandableLayout.visibility = visibilityExpandableLayout
+
         }
         return root
     }
