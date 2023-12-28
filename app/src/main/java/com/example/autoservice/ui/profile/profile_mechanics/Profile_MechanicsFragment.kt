@@ -26,7 +26,7 @@ class Profile_MechanicsFragment : Fragment() {
         val root: View = binding.root
         setHasOptionsMenu(true);
 
-        setup()
+       // setup()
 
         return root
     }
@@ -41,13 +41,13 @@ class Profile_MechanicsFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setup(){
-        val newOrders = binding.newOrdersCardView
-        newOrders.setOnClickListener {
-            val visibilityExpandableLayout =
-                if (binding.mechanicsListViewOrder.visibility == View.GONE) View.VISIBLE
-                else View.GONE
-            binding.mechanicsListViewOrder.visibility = visibilityExpandableLayout
-        }
-    }
+//    private fun setup(){
+//        val newOrders = binding.newOrdersCardView
+//        newOrders.setOnClickListener {
+//            val visibilityExpandableLayout =
+//                if (binding.mechanicsListViewOrder.visibility == View.GONE) View.VISIBLE
+//                else View.GONE
+//            binding.mechanicsListViewOrder.visibility = visibilityExpandableLayout
+//        }
+//    }
 }

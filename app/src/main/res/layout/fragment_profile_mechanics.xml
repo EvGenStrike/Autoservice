@@ -26,7 +26,7 @@
     </TextView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/new_orders_card_view"
+        android:id="@+id/skill_card_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:minHeight="50dp"
