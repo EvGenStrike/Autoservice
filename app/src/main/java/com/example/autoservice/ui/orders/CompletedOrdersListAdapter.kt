@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.allViews
 import com.example.autoservice.R
 
 class CompletedOrdersListAdapter(
@@ -45,9 +46,34 @@ class CompletedOrdersListAdapter(
                     else View.GONE
             }
         }
+        val curOrder = ordersList[position]
+        val orderTextViews = convertView.allViews.filterIsInstance<TextView>()
+            .filter { view ->
+                view.id != View.NO_ID &&
+                        view.resources.getResourceName(view.id)
+                            .contains("text", ignoreCase = true)
+            }.toList()
+        Order::class.java.declaredFields.forEach { field ->
+            field.isAccessible = true
+            val value = field.get(curOrder)?.toString() ?: "Нет данных"
+            orderTextViews.forEach { textView ->
+                val idName =
+                    convertView.context.resources.getResourceName(textView.id).lowercase()
+                val fieldName = field.name.lowercase().let {
+                    if (it.contains("car")) it.replace("car", "") else it
+                }
 
+                val splitIdName = idName
+                    .split(Regex("[/_]"))[if (idName.contains("car")) 2 else 1]
+
+                if (fieldName.contains(splitIdName)) {
+                    textView.text = value
+                    return@forEach
+                }
+            }
+        }
         val countOrdersText: TextView =
-            convertView?.findViewById(R.id.order_number_text) as TextView
+            convertView.findViewById(R.id.order_number_text) as TextView
         countOrdersText.text = "Заказ №%s".format(position + 1)
 
         return convertView

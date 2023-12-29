@@ -7,8 +7,7 @@
     android:layout_margin="10dp"
     android:minHeight="70dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:id="@+id/completed_order_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

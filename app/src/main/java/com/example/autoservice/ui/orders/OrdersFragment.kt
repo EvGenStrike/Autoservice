@@ -11,6 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.autoservice.databinding.FragmentOrdersBinding
 import com.example.autoservice.ui.orders.OrderAdapter.OrderViewHolder
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import java.lang.Exception
+import java.util.Objects
 
 class OrdersFragment : Fragment() {
 
@@ -18,6 +25,8 @@ class OrdersFragment : Fragment() {
 
     private val binding get() = _binding!!
     private lateinit var parentRecyclerView: RecyclerView
+    private lateinit var loadText: TextView
+    private lateinit var dbRef: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,62 +38,52 @@ class OrdersFragment : Fragment() {
 
         _binding = FragmentOrdersBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
+        parentRecyclerView = binding.parentRecyclerView
+        loadText = binding.textLoad
+        dbRef = FirebaseDatabase.getInstance().getReference("Orders")
         val textView: TextView = binding.textHome
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         val modelsList = ArrayList<CurrentOrderViewModel>()
-        val currentOrdersList: MutableList<Order> = java.util.ArrayList()
         val newOrdersList = ArrayList<Order>()
+        val completedOrdersList = ArrayList<Order>()
+        parentRecyclerView.visibility = View.GONE
+        val ref = FirebaseDatabase.getInstance().reference.child("Order")
+        val adapterNewOrders = context?.let { NewOrdersListAdapter(it, newOrdersList) }
+        binding.newOrdersList.adapter = adapterNewOrders
+        val adapterCompletedOrders = context?.let { CompletedOrdersListAdapter(it, completedOrdersList) }
+        binding.completedOrdersList.adapter = adapterCompletedOrders
 
-        val curOrder = Order("Заказ 1",
-            "Иванов Иван Иванович",
-            "Волков Владимир Владимирович",
-            "Audi Q8",
-            "O111OO196",
-            "CKO3437483HS",
-            "Поменять резину",
-            1230.0,
-            "Биение в руль",
-            "12.02.2023",
-            "13.02.2023",
-            "Комментарий")
-        currentOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
+        ref.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (ds in dataSnapshot.children) {
+                        val order: Order? = ds.getValue(Order::class.java)
+                        when (order?.orderType) {
+                            OrderType.Current ->  modelsList.add(CurrentOrderViewModel(order))
+                            OrderType.New -> newOrdersList.add(order)
+                            OrderType.Completed -> completedOrdersList.add(order)
+                            else -> {}
+                        }
 
-        newOrdersList.add(curOrder)
-        newOrdersList.add(curOrder)
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        modelsList.add(CurrentOrderViewModel(curOrder))
-        parentRecyclerView = binding.parentRecyclerView
+                    }
+                    adapterNewOrders?.notifyDataSetChanged()
+                    adapterCompletedOrders?.notifyDataSetChanged()
+
+                    binding.newOrdersCountText.text = newOrdersList.size.toString()
+                    loadText.visibility = View.INVISIBLE
+                    parentRecyclerView.visibility = View.VISIBLE
+
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    //handle databaseError
+                }
+            })
         parentRecyclerView.layoutManager = LinearLayoutManager(context)
         val adapterCurrentOrders = OrderAdapter(modelsList)
         parentRecyclerView.adapter = adapterCurrentOrders
-        
-        val adapterNewOrders = context?.let { NewOrdersListAdapter(it, newOrdersList) }
-        binding.newOrdersList.adapter = adapterNewOrders
-        binding.newOrdersCountText.text = newOrdersList.size.toString()
 
         val newOrders = binding.newOrdersCardView
         newOrders.setOnClickListener {
@@ -98,8 +97,7 @@ class OrdersFragment : Fragment() {
             binding.newOrdersCountText.visibility = visibilityCountText
         }
 
-        binding.completedOrdersList.adapter =
-            context?.let { CompletedOrdersListAdapter(it, newOrdersList) }
+
         val completedOrders = binding.completedOrdersCardView
         var originalScrollPosition = 0
         completedOrders.setOnClickListener {

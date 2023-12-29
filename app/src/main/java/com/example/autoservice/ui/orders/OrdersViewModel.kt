@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class OrdersViewModel : ViewModel() {
+class   OrdersViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Заказы"
+        value = ""
     }
     val text: LiveData<String> = _text
 }
