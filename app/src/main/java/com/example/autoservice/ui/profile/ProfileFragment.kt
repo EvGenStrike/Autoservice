@@ -59,7 +59,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setListView(listView: ListView){
-        val availableButtons = arrayListOf("Навыки", "Механики")
+        val availableButtons = arrayListOf("Навыки", "Новые заказы")
 
         val listViewAdapter = ArrayAdapter(
             requireContext(),
@@ -78,7 +78,7 @@ class ProfileFragment : Fragment() {
                 "Навыки" -> {
                     view?.findNavController()?.navigate(R.id.action_profileFragment_to_skillsFragment)
                 }
-                "Механики" -> {
+                "Новые заказы" -> {
                     view?.findNavController()?.navigate(R.id.action_profileFragment_to_mechanicsFragment)
                 }
             }
@@ -89,7 +89,7 @@ class ProfileFragment : Fragment() {
     private fun setImageViewOnClick(imageView: ImageView) {
         imageView.setOnClickListener {
             if (it.equals(imageView)){
-                Toast.makeText(requireContext(), "Выберите изображения", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Выберите изображение", Toast.LENGTH_LONG).show()
                 openGallery()
                 //changeImage(imageView)
             }
