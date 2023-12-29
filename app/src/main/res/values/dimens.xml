@@ -7,4 +7,5 @@
     <dimen name="padding_main_fragment">10sp</dimen>
     <dimen name="padding_profile_fragment">20sp</dimen>
     <dimen name="text_size_profile_fragment">24sp</dimen>
+    <dimen name="oval_button_corners">40dp</dimen>
 </resources>

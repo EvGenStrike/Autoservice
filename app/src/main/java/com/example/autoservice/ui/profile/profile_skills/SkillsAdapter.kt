@@ -4,60 +4,61 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.autoservice.R
 import com.example.autoservice.ui.profile.profile_skills.Skill
 
 class SkillsAdapter(
     private val context: Context,
-    private val skillsList: List<Skill>
-) : BaseAdapter() {
-    private lateinit var skillName: TextView
-    private lateinit var skillDescription: TextView
-    override fun getCount(): Int {
+    private val skillsList: ArrayList<Skill>,
+    private val onItemClickListener: OnItemClickListener? = null
+) : RecyclerView.Adapter<SkillsAdapter.SkillsViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(skill: Skill)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkillsViewHolder {
+        val inflater = LayoutInflater.from(context)
+        val view = inflater.inflate(R.layout.fragment_profile_skills_item, parent, false)
+        return SkillsViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: SkillsViewHolder, position: Int) {
+        val skill = skillsList[position]
+        holder.bind(skill)
+
+        holder.cardView.setOnClickListener {
+            val visibilityExpandableLayout =
+                if (holder.expandableLayout.visibility == View.GONE) View.VISIBLE
+                else View.GONE
+            holder.expandableLayout.visibility = visibilityExpandableLayout
+
+            // Вызываем onItemClick, если слушатель установлен
+            onItemClickListener?.onItemClick(skill)
+        }
+    }
+
+    override fun getItemCount(): Int {
         return skillsList.size
     }
 
-    override fun getItem(position: Int): Any {
-        return skillsList[position]
-    }
+    inner class SkillsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val skillNameTextView: TextView = itemView.findViewById(R.id.skills_card_view_skill_name)
+        val skillDescriptionTextView: TextView = itemView.findViewById(R.id.skills_card_view_skill_description)
+        val cardView: CardView = itemView.findViewById(R.id.skill_card_view)
+        val expandableLayout: LinearLayout = itemView.findViewById(R.id.profile_fragment_skills_expandable_layout)
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+        fun bind(skill: Skill) {
+            skillNameTextView.text = skill.skillName
+            skillDescriptionTextView.text = skill.skillDescription
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        var convertView = convertView
-        val skill = getItem(position) as Skill
-        val holderView: HolderView
-
-        if (convertView == null){
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = inflater.inflate(R.layout.fragment_profile_skills_item, null)
-            holderView = HolderView(convertView)
+            setupMaterialCardView(itemView as FrameLayout)
         }
-        else{
-            holderView = convertView.tag as HolderView
-        }
-
-        setupMaterialCardView(convertView as FrameLayout)
-
-        val skillNameTextView = convertView!!.findViewById<TextView>(R.id.skills_card_view_skill_name)
-        skillNameTextView.text = skill.skillName
-
-        val skillDescriptionTextView = convertView.findViewById<TextView>(R.id.skills_card_view_skill_description)
-        skillDescriptionTextView.text = skill.skillDescription
-
-        return convertView
-    }
-
-    private class HolderView(view: View){
-        val skillName: TextView = view.findViewById(R.id.skills_card_view_skill_name)
-        val skillDescription: TextView = view.findViewById(R.id.skills_card_view_skill_description)
     }
 
     private fun setupMaterialCardView(frameLayout: FrameLayout){

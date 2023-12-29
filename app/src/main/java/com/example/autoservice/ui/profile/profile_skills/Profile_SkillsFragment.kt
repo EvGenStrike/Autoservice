@@ -5,27 +5,25 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.AdapterView
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.autoservice.R
 import com.example.autoservice.databinding.FragmentProfileSkillsBinding
 import com.example.autoservice.ui.orders.SkillsAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 //ПОМЕНЯТЬ ID В XML ДЛЯ НАВЫКОВ И МЕХАНИКОВ, СДЕЛАТЬ LISTVIEW ДЛЯ НАВЫКОВ И МЕХАНИКОВ
 
-class Profile_SkillsFragment : Fragment(), AdapterView.OnItemClickListener{
+class Profile_SkillsFragment : Fragment(), AdapterView.OnItemClickListener, NewSkillDialogListener{
     private var _binding: FragmentProfileSkillsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var skillsList: List<Skill>
+    private var skillsList: ArrayList<Skill> = arrayListOf(
+    Skill("Краска машины", "Умею быстро красить машину, используя минимум краски"),
+    Skill("Стёкла", "Могу быстро заменить стёкла")
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +37,7 @@ class Profile_SkillsFragment : Fragment(), AdapterView.OnItemClickListener{
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true);
 
-        setupSkillsListView()
+        setupSkillsRecyclerView()
         setupFab()
 
         return root
@@ -55,23 +53,8 @@ class Profile_SkillsFragment : Fragment(), AdapterView.OnItemClickListener{
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setupSkillsListView(){
-        val skillsListView: ListView = binding.profileFragmentSkillsListView;
-        skillsList = listOf(
-            Skill(
-            "Краска машины",
-            "Умею быстро красить машину, используя минимум краски"
-            ),
-            Skill(
-                "Стёкла",
-                "Могу быстро заменить стёкла"
-            ))
-
-        val listViewAdapter = SkillsAdapter(
-            requireContext(),
-            skillsList)
-        skillsListView.adapter = listViewAdapter
-        skillsListView.onItemClickListener = this
+    private fun setupSkillsRecyclerView() {
+        updateSkills()
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -80,7 +63,37 @@ class Profile_SkillsFragment : Fragment(), AdapterView.OnItemClickListener{
             requireActivity(), "Нажал на ${skill.skillName}", Toast.LENGTH_SHORT).show()
     }
 
-    private fun setupFab(){
+    fun updateSkills(){
+        val skillsRecyclerView: RecyclerView = binding.profileFragmentSkillsRecyclerView
 
+        val recyclerViewAdapter = SkillsAdapter(
+            requireContext(),
+            skillsList,
+            object : SkillsAdapter.OnItemClickListener {
+                override fun onItemClick(skill: Skill) {
+                    //реализация клика на элемент
+                }
+            }
+        )
+        skillsRecyclerView.adapter = recyclerViewAdapter
     }
+
+    private fun setupFab(){
+        val fab: FloatingActionButton = binding.skillsNewFab
+        fab.setOnClickListener{
+            showDialogFradment(fab)
+        }
+    }
+
+    private fun showDialogFradment(view: View) {
+        val dialogFragment = NewSkillDialogFragment()
+        dialogFragment.dialogListener = this
+        dialogFragment.show(requireActivity().supportFragmentManager, "NewSkillDialogFragment")
+    }
+
+    override fun onSkillAdded(skillName: String, skillDescription: String) {
+        skillsList.add(Skill(skillName, skillDescription))
+        updateSkills()
+    }
+
 }

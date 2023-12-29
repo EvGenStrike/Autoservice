@@ -6,12 +6,12 @@
     android:layout_height="wrap_content"
     tools:context=".ui.profile.ProfileFragment"
     android:background="#474747"
-    android:id="@+id/profile_fragment_skills_item_constraint_layout"
+    android:id="@+id/profile_fragment_order_constraint_layout"
     android:layout_margin="@dimen/padding_profile_fragment"
     >
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/skill_card_view"
+        android:id="@+id/profile_fragment_order_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="50dp"
@@ -20,11 +20,12 @@
         app:strokeColor="@color/light_yellow"
         app:strokeWidth="4dp"
         android:animateLayoutChanges="true"
+        app:layout_constraintTop_toBottomOf="@id/skills_text_view"
         android:layout_marginTop="@dimen/padding_profile_fragment"
         >
 
         <LinearLayout
-            android:id="@+id/linear_layout"
+            android:id="@+id/linear_layout_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
@@ -35,10 +36,10 @@
             >
 
             <TextView
-                android:id="@+id/skills_card_view_skill_name"
+                android:id="@+id/profile_fragment_order_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Навыки"
+                android:text="Заказ 1"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_profile_fragment"
                 >
@@ -48,27 +49,49 @@
 
 
         <LinearLayout
-            android:id="@+id/profile_fragment_skills_expandable_layout"
+            android:id="@+id/profile_fragment_order_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="12sp"
             android:orientation="vertical"
-            android:padding="@dimen/padding_profile_fragment"
-            android:visibility="gone"
+            android:visibility="visible"
             android:animateLayoutChanges="true"
             >
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/light_yellow"
+                >
+            </View>
+
             <TextView
-                android:id="@+id/skills_card_view_skill_description"
+                android:id="@+id/profile_fragment_order_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxHeight="150dp"
-                android:text="подробная информация"
+                android:text="Краткая информация о заказе"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_profile_fragment"
+                android:layout_marginStart="@dimen/padding_profile_fragment"
+                android:layout_marginEnd="@dimen/padding_profile_fragment"
                 >
             </TextView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/profile_fragment_choose_mechanic_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_profile_fragment"
+                android:layout_marginEnd="@dimen/padding_profile_fragment"
+                android:layout_marginTop="50dp"
+                android:text="Назначить механика"
+                android:background="@drawable/oval_button"
+                android:textColor="@color/white"
+                android:padding="20dp"
+                >
+            </androidx.appcompat.widget.AppCompatButton>
 
         </LinearLayout>
 
