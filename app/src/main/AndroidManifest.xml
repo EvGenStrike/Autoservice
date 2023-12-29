@@ -30,7 +30,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateAnythingInDataBase"
+            android:name=".Registration"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
