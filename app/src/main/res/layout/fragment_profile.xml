@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment"
     android:background="#474747"
-
     >
 
     <RelativeLayout
@@ -27,14 +26,14 @@
             >
         </ImageView>
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_fragment_profile_picture"
             android:src="@drawable/ic_profile_picture"
             android:layout_width="120sp"
             android:layout_height="120sp"
             android:layout_centerInParent="true"
             >
-        </ImageView>
+        </de.hdodenhof.circleimageview.CircleImageView>
 
     </RelativeLayout>
 

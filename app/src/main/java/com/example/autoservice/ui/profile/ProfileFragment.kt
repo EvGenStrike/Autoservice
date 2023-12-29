@@ -19,10 +19,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.autoservice.R
 import com.example.autoservice.databinding.FragmentProfileBinding
 import com.example.autoservice.ui.mechanics.MechanicsExpandableListViewAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.IOException
 
 
@@ -54,7 +59,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setListView(listView: ListView){
-        val availableButtons = arrayListOf("Навыки", "Механики")
+        val availableButtons = arrayListOf("Навыки", "Новые заказы")
 
         val listViewAdapter = ArrayAdapter(
             requireContext(),
@@ -62,12 +67,29 @@ class ProfileFragment : Fragment() {
             R.id.profile_fragment_available_buttons_list_view_element,
             availableButtons)
         listView.adapter = listViewAdapter
+
+        setListViewClick(listView)
     }
+
+    private fun setListViewClick(listView: ListView){
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val selectedItem = listView.adapter.getItem(position).toString()
+            when(selectedItem){
+                "Навыки" -> {
+                    view?.findNavController()?.navigate(R.id.action_profileFragment_to_skillsFragment)
+                }
+                "Новые заказы" -> {
+                    view?.findNavController()?.navigate(R.id.action_profileFragment_to_mechanicsFragment)
+                }
+            }
+        }
+    }
+
 
     private fun setImageViewOnClick(imageView: ImageView) {
         imageView.setOnClickListener {
             if (it.equals(imageView)){
-                Toast.makeText(requireContext(), "asdf", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Выберите изображение", Toast.LENGTH_LONG).show()
                 openGallery()
                 //changeImage(imageView)
             }

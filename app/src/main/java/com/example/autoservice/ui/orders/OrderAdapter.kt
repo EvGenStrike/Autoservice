@@ -4,16 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.SimpleAdapter
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.allViews
-import androidx.lifecycle.LiveData
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.autoservice.R
-import kotlin.coroutines.coroutineContext
 
 
 class OrderAdapter(mList: List<CurrentOrderViewModel>) :

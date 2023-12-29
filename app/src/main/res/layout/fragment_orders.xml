@@ -125,7 +125,7 @@
                 android:layout_height="340dp"
                 android:layout_marginTop="20dp"
                 android:nestedScrollingEnabled="true"
-                app:layout_constraintTop_toBottomOf="@+id/new_orders_card_view"
+                app:layout_constraintTop_toBottomOf="@+id/skill_card_view"
                 app:layout_constraintBottom_toTopOf="@+id/completed_orders_card_view"
                 app:layout_constraintHeight_default="wrap"
                 app:layout_constraintVertical_weight="0" />
