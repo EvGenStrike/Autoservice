@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/menu_background_color"
+    >
+>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"
+        >
+
+        <EditText
+            android:id="@+id/add_new_skill_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Навык"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/add_new_skill_top_rectangle"
+            android:gravity="center"
+            android:textColor="@color/white"
+            >
+        </EditText>
+
+        <EditText
+            android:id="@+id/add_new_skill_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Описание навыка"
+            android:background="@drawable/add_new_skill_top_rectangle"
+            android:gravity="center"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/add_new_skill_name"
+            app:layout_constraintTop_toBottomOf="@id/add_new_skill_name"
+            app:layout_constraintEnd_toEndOf="@id/add_new_skill_name"
+            android:maxHeight="250dp"
+            >
+        </EditText>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_new_skill_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/oval_button"
+        android:text="Сохранить"
+        android:textColor="@color/light_yellow"
+        android:clickable="true"
+        android:focusable="true"
+        >
+    </androidx.appcompat.widget.AppCompatButton>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

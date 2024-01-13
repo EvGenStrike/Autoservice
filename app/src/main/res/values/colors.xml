@@ -19,4 +19,6 @@
     <color name="current_orders_title_text_color">#6C6C6C</color>
     <color name="current_orders_open_background_color">#D9D9D9</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="profile_fragment_list_view">#C7B61C</color>
+    <color name="profile_fragment_logout_text_color">#DEDBE4</color>
 </resources>

@@ -10,7 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.autoservice.databinding.FragmentOrdersBinding
+<<<<<<< HEAD
 import com.google.android.material.card.MaterialCardView
+=======
+import com.example.autoservice.ui.orders.OrderAdapter.OrderViewHolder
+>>>>>>> master
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -18,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.lang.Exception
 import java.util.Objects
-
 
 class OrdersFragment : Fragment() {
 

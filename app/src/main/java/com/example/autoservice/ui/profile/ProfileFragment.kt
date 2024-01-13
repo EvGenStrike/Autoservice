@@ -10,16 +10,24 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.autoservice.R
 import com.example.autoservice.databinding.FragmentProfileBinding
+import com.example.autoservice.ui.mechanics.MechanicsExpandableListViewAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.IOException
 
 
@@ -45,14 +53,43 @@ class ProfileFragment : Fragment() {
         val profileImageView = binding.profileFragmentProfilePicture
         imageView = profileImageView
         setImageViewOnClick(binding.profileFragmentProfilePicture)
+        setListView(binding.profileFragmentAvailableButtonsListView)
 
         return root
     }
 
+    private fun setListView(listView: ListView){
+        val availableButtons = arrayListOf("Навыки", "Новые заказы")
+
+        val listViewAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.profile_fragment_available_buttons_list_view,
+            R.id.profile_fragment_available_buttons_list_view_element,
+            availableButtons)
+        listView.adapter = listViewAdapter
+
+        setListViewClick(listView)
+    }
+
+    private fun setListViewClick(listView: ListView){
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val selectedItem = listView.adapter.getItem(position).toString()
+            when(selectedItem){
+                "Навыки" -> {
+                    view?.findNavController()?.navigate(R.id.action_profileFragment_to_skillsFragment)
+                }
+                "Новые заказы" -> {
+                    view?.findNavController()?.navigate(R.id.action_profileFragment_to_mechanicsFragment)
+                }
+            }
+        }
+    }
+
+
     private fun setImageViewOnClick(imageView: ImageView) {
         imageView.setOnClickListener {
             if (it.equals(imageView)){
-                Toast.makeText(requireContext(), "asdf", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Выберите изображение", Toast.LENGTH_LONG).show()
                 openGallery()
                 //changeImage(imageView)
             }
@@ -88,43 +125,4 @@ class ProfileFragment : Fragment() {
         }
     }
 
-//    private fun changeImage(imageView: ImageView){
-//        Glide.with(this)
-//            .asBitmap()
-//            .load(imageUrl)
-//            .into(object : CustomTarget<Bitmap>() {
-//                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-//                    // Создаем RoundedBitmapDrawable
-//                    val roundedDrawable = RoundedBitmapDrawableFactory.create(resources, resource)
-//                    roundedDrawable.cornerRadius = 10f // радиус скругления углов
-//                    roundedDrawable.setAntiAlias(true)
-//
-//                    // Добавляем контур
-//                    addBorderToDrawable(roundedDrawable, 5, Color.RED) // ширина и цвет контура
-//
-//                    // Устанавливаем Drawable в ImageView
-//                    imageView.setImageDrawable(roundedDrawable)
-//                }
-//
-//                override fun onLoadCleared(placeholder: Drawable?) {
-//                    // Можно добавить обработку, если не удалось загрузить изображение
-//                }
-//            })
-//    }
-//
-//    private fun addBorderToDrawable(drawable: Drawable, borderWidth: Int, borderColor: Int) {
-//        val paint = Paint()
-//        paint.style = Paint.Style.STROKE
-//        paint.strokeWidth = borderWidth.toFloat()
-//        paint.color = borderColor
-//        paint.isAntiAlias = true
-//
-//        val borderDrawable = BitmapDrawable(resources, (drawable as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true))
-//        val canvas = android.graphics.Canvas(borderDrawable.bitmap)
-//        val borderRect = android.graphics.RectF(0f, 0f, borderDrawable.intrinsicWidth.toFloat(), borderDrawable.intrinsicHeight.toFloat())
-//        canvas.drawRoundRect(borderRect, drawable.cornerRadius, drawable.cornerRadius, paint)
-//
-//        drawable.setBounds(0, 0, borderDrawable.intrinsicWidth, borderDrawable.intrinsicHeight)
-//        drawable.draw(canvas)
-//    }
 }

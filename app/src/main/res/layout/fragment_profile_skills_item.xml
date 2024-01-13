@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.profile.ProfileFragment"
+    android:background="#474747"
+    android:id="@+id/profile_fragment_skills_item_constraint_layout"
+    android:layout_margin="@dimen/padding_profile_fragment"
+    >
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/skill_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        app:cardBackgroundColor="@color/menu_background_color"
+        app:cardCornerRadius="12dp"
+        app:strokeColor="@color/light_yellow"
+        app:strokeWidth="4dp"
+        android:animateLayoutChanges="true"
+        android:layout_marginTop="@dimen/padding_profile_fragment"
+        >
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:paddingTop="5dp"
+            android:paddingStart="20sp"
+            android:paddingEnd="20sp"
+            >
+
+            <TextView
+                android:id="@+id/skills_card_view_skill_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Навыки"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_profile_fragment"
+                >
+            </TextView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/profile_fragment_skills_expandable_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="12sp"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_profile_fragment"
+            android:visibility="gone"
+            android:animateLayoutChanges="true"
+            >
+
+            <TextView
+                android:id="@+id/skills_card_view_skill_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="150dp"
+                android:text="подробная информация"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_profile_fragment"
+                >
+            </TextView>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</FrameLayout>
