@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "675589136801",
+    "firebase_url": "https://autoservicekotlin-default-rtdb.firebaseio.com",
+    "project_id": "autoservicekotlin",
+    "storage_bucket": "autoservicekotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:675589136801:android:ad771e412228a42832ebe0",
+        "android_client_info": {
+          "package_name": "com.example.autoservice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDi3EntakhXK-Tw4xMKhdVSsYkTiPRygU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

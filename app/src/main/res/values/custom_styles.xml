@@ -4,4 +4,12 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">40%</item>
     </style>
+
+    <style name="Line">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1sp</item>
+        <item name="android:background">@color/profile_fragment_list_view</item>
+    </style>
+
 </resources>
+

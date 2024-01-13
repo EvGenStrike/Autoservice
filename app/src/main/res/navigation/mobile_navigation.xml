@@ -21,6 +21,31 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.autoservice.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_profileFragment_to_skillsFragment"
+            app:destination="@id/profile_skillsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_mechanicsFragment"
+            app:destination="@id/profile_mechanicsFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/profile_skillsFragment"
+        android:name="com.example.autoservice.ui.profile.profile_skills.Profile_SkillsFragment"
+        android:label="@string/title_profile_skills"
+        tools:layout="@layout/fragment_profile_skills"
+        >
+    </fragment>
+
+    <fragment
+        android:id="@+id/profile_mechanicsFragment"
+        android:name="com.example.autoservice.ui.profile.profile_skills.Profile_MechanicsFragment"
+        android:label="@string/title_profile_mechanics"
+        tools:layout="@layout/fragment_profile_mechanics"
+        >
+    </fragment>
 
 </navigation>

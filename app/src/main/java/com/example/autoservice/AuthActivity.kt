@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
+
 private lateinit var auth: FirebaseAuth
 
 class AuthActivity : AppCompatActivity() {

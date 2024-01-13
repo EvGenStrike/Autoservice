@@ -6,17 +6,113 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment"
     android:background="#474747"
-    android:paddingStart = "@dimen/padding_profile_fragment"
-    android:paddingEnd ="@dimen/padding_profile_fragment"
     >
 
-    <ImageView
-        android:id="@+id/profile_fragment_profile_picture"
-        android:layout_width="120sp"
-        android:layout_height="120sp"
+    <RelativeLayout
+        android:layout_margin="@dimen/padding_profile_fragment"
+        android:id="@+id/profile_fragment_profile_picture_container"
+        android:layout_width="130sp"
+        android:layout_height="130sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/circular_bordered_image"
+        app:layout_constraintTop_toTopOf="parent"
         >
-    </ImageView>
+
+        <ImageView
+            android:id="@+id/profile_fragment_profile_picture_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_profile_picture_background"
+            >
+        </ImageView>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_fragment_profile_picture"
+            android:src="@drawable/ic_profile_picture"
+            android:layout_width="120sp"
+            android:layout_height="120sp"
+            android:layout_centerInParent="true"
+            >
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_margin="@dimen/padding_profile_fragment"
+        android:id="@+id/profile_fragment_profile_name_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/profile_fragment_profile_picture_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/profile_fragment_profile_picture_container">
+
+        <TextView
+            android:id="@+id/profile_fragment_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Иванов Иван"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_profile_fragment"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:paddingBottom="@dimen/padding_profile_fragment"
+            android:paddingLeft="@dimen/padding_profile_fragment"
+            android:paddingRight="@dimen/padding_profile_fragment"
+            >
+        </TextView>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0sp"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toBottomOf="@id/profile_fragment_profile_picture_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/padding_profile_fragment"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="@color/profile_fragment_list_view"
+            app:layout_constraintBottom_toTopOf="@id/profile_fragment_available_buttons_list_view"
+            android:visibility="visible"/>
+
+        <ListView
+            android:id="@+id/profile_fragment_available_buttons_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/profile_fragment_list_view"
+            android:dividerHeight="2sp"
+            >
+        </ListView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="@dimen/padding_profile_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginStart="@dimen/text_size_profile_fragment"
+            android:id="@+id/profile_fragment_logout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="Выход"
+            android:textColor="@color/profile_fragment_logout_text_color"
+            android:textSize="@dimen/text_size_profile_fragment"
+            >
+        </androidx.appcompat.widget.AppCompatButton>
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
