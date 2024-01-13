@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.autoservice.databinding.FragmentOrdersBinding
-import com.example.autoservice.ui.orders.OrderAdapter.OrderViewHolder
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -33,58 +32,37 @@ class OrdersFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this)[OrdersViewModel::class.java]
-
-        _binding = FragmentOrdersBinding.inflate(inflater, container, false)
+        setFields(inflater, container)
+        setExpandableViewOnOrders(binding)
         val root: View = binding.root
-        parentRecyclerView = binding.parentRecyclerView
-        loadText = binding.textLoad
-        dbRef = FirebaseDatabase.getInstance().getReference("Orders")
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        val modelsList = ArrayList<CurrentOrderViewModel>()
+        val ordersTableRef = FirebaseDatabase.getInstance().reference.child("Order")
+
+        val modelsCurrentOrdersList = ArrayList<CurrentOrderViewModel>()
         val newOrdersList = ArrayList<Order>()
         val completedOrdersList = ArrayList<Order>()
-        parentRecyclerView.visibility = View.GONE
-        val ref = FirebaseDatabase.getInstance().reference.child("Order")
-        val adapterNewOrders = context?.let { NewOrdersListAdapter(it, newOrdersList) }
-        binding.newOrdersList.adapter = adapterNewOrders
-        val adapterCompletedOrders = context?.let { CompletedOrdersListAdapter(it, completedOrdersList) }
-        binding.completedOrdersList.adapter = adapterCompletedOrders
 
-        ref.addListenerForSingleValueEvent(
-            object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    for (ds in dataSnapshot.children) {
-                        val order: Order? = ds.getValue(Order::class.java)
-                        when (order?.orderType) {
-                            OrderType.Current ->  modelsList.add(CurrentOrderViewModel(order))
-                            OrderType.New -> newOrdersList.add(order)
-                            OrderType.Completed -> completedOrdersList.add(order)
-                            else -> {}
-                        }
+        val (adapterNewOrders, adapterCompletedOrders) = setAdapters(
+            newOrdersList,
+            completedOrdersList,
+            modelsCurrentOrdersList
+        )
 
-                    }
-                    adapterNewOrders?.notifyDataSetChanged()
-                    adapterCompletedOrders?.notifyDataSetChanged()
+        setDBListeners(
+            ordersTableRef,
+            modelsCurrentOrdersList,
+            newOrdersList,
+            completedOrdersList,
+            adapterNewOrders,
+            adapterCompletedOrders
+        )
 
-                    binding.newOrdersCountText.text = newOrdersList.size.toString()
-                    loadText.visibility = View.INVISIBLE
-                    parentRecyclerView.visibility = View.VISIBLE
+        return root
+    }
 
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    //handle databaseError
-                }
-            })
-        parentRecyclerView.layoutManager = LinearLayoutManager(context)
-        val adapterCurrentOrders = OrderAdapter(modelsList)
-        parentRecyclerView.adapter = adapterCurrentOrders
-
+    private fun setExpandableViewOnOrders(
+        binding: FragmentOrdersBinding
+    ) {
+        val completedOrders = binding.completedOrdersCardView
         val newOrders = binding.newOrdersCardView
         newOrders.setOnClickListener {
             val visibilityExpandableLayout =
@@ -97,17 +75,89 @@ class OrdersFragment : Fragment() {
             binding.newOrdersCountText.visibility = visibilityCountText
         }
 
-
-        val completedOrders = binding.completedOrdersCardView
-        var originalScrollPosition = 0
         completedOrders.setOnClickListener {
             val visibilityExpandableLayout =
                 if (binding.completedOrdersExpandableLayout.visibility == View.GONE) View.VISIBLE
                 else View.GONE
             binding.completedOrdersExpandableLayout.visibility = visibilityExpandableLayout
-
         }
-        return root
+    }
+
+    private fun setDBListeners(
+        ordersTableRef: DatabaseReference,
+        modelsCurrentOrdersList: ArrayList<CurrentOrderViewModel>,
+        newOrdersList: ArrayList<Order>,
+        completedOrdersList: ArrayList<Order>,
+        adapterNewOrders: NewOrdersListAdapter?,
+        adapterCompletedOrders: CompletedOrdersListAdapter?
+    ) {
+        ordersTableRef.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (ds in dataSnapshot.children) {
+                        val order: Order? = ds.getValue(Order::class.java)
+                        when (order?.orderType) {
+                            OrderType.Current -> modelsCurrentOrdersList.add(
+                                CurrentOrderViewModel(
+                                    order
+                                )
+                            )
+                            OrderType.New -> newOrdersList.add(order)
+                            OrderType.Completed -> completedOrdersList.add(order)
+                            else -> {}
+                        }
+
+                    }
+                    updateViewAfterGetValuesFromDB(
+                        adapterNewOrders,
+                        adapterCompletedOrders,
+                        newOrdersList
+                    )
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    //handle databaseError
+                }
+            })
+    }
+
+    private fun updateViewAfterGetValuesFromDB(
+        adapterNewOrders: NewOrdersListAdapter?,
+        adapterCompletedOrders: CompletedOrdersListAdapter?,
+        newOrdersList: ArrayList<Order>
+    ) {
+        adapterNewOrders?.notifyDataSetChanged()
+        adapterCompletedOrders?.notifyDataSetChanged()
+
+        binding.newOrdersCountText.text = newOrdersList.size.toString()
+        loadText.visibility = View.INVISIBLE
+        parentRecyclerView.visibility = View.VISIBLE
+        binding.completedOrdersCardView.visibility = View.VISIBLE
+        binding.newOrdersCardView.visibility = View.VISIBLE
+    }
+
+    private fun setAdapters(
+        newOrdersList: ArrayList<Order>,
+        completedOrdersList: ArrayList<Order>,
+        modelsCurrentOrdersList: ArrayList<CurrentOrderViewModel>
+    ): Pair<NewOrdersListAdapter?, CompletedOrdersListAdapter?> {
+        val adapterNewOrders = context?.let { NewOrdersListAdapter(it, newOrdersList) }
+        val adapterCompletedOrders =
+            context?.let { CompletedOrdersListAdapter(it, completedOrdersList) }
+        parentRecyclerView.layoutManager = LinearLayoutManager(context)
+        val adapterCurrentOrders = OrderAdapter(modelsCurrentOrdersList)
+        parentRecyclerView.adapter = adapterCurrentOrders
+
+        binding.newOrdersList.adapter = adapterNewOrders
+        binding.completedOrdersList.adapter = adapterCompletedOrders
+        return Pair(adapterNewOrders, adapterCompletedOrders)
+    }
+
+    private fun setFields(inflater: LayoutInflater, container: ViewGroup?) {
+        _binding = FragmentOrdersBinding.inflate(inflater, container, false)
+        parentRecyclerView = binding.parentRecyclerView
+        loadText = binding.textLoad
+        dbRef = FirebaseDatabase.getInstance().getReference("Orders")
     }
 
     override fun onDestroyView() {

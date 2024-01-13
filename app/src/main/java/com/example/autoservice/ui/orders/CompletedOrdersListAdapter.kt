@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.allViews
 import com.example.autoservice.R
@@ -46,6 +47,9 @@ class CompletedOrdersListAdapter(
                     else View.GONE
             }
         }
+        val ratingBar: ProgressBar =
+            convertView.findViewById<ProgressBar>(R.id.completed_order_rating)
+        ratingBar.progress = ordersList[position].starsCount
         val curOrder = ordersList[position]
         val orderTextViews = convertView.allViews.filterIsInstance<TextView>()
             .filter { view ->
