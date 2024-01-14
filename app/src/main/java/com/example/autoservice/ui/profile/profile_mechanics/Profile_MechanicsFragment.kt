@@ -107,6 +107,7 @@ class Profile_MechanicsFragment : Fragment(), AdapterView.OnItemClickListener,
                 "Биение в руль",
                 "12.02.2023",
                 "13.02.2023",
+                "",
                 "Комментарий"
             ),
             Order(
@@ -122,6 +123,7 @@ class Profile_MechanicsFragment : Fragment(), AdapterView.OnItemClickListener,
                 "12.02.2023",
                 "13.02.2023",
                 "Комментарий",
+                "",
                 4
             ),
             Order(
@@ -137,6 +139,7 @@ class Profile_MechanicsFragment : Fragment(), AdapterView.OnItemClickListener,
                 "12.02.2023",
                 "13.02.2023",
                 "Комментарий",
+                "",
                 3
             )
         )

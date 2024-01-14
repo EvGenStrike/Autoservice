@@ -67,6 +67,7 @@ class MechanicsFragment : Fragment() {
                     "12.02.2023",
                     "13.02.2023",
                     "Комментарий",
+                    "",
                     5),
                 Order("Заказ 2",
                     "Иванов Иван Иванович",
@@ -80,6 +81,7 @@ class MechanicsFragment : Fragment() {
                     "12.02.2023",
                     "13.02.2023",
                     "Комментарий",
+                    "",
                     4)
             )))
         addMechanic(Mechanic(
@@ -98,6 +100,7 @@ class MechanicsFragment : Fragment() {
                 "12.02.2023",
                 "13.02.2023",
                 "Комментарий",
+                    "",
                 3),
                 Order("Заказ 2",
                     "Мартынов Дмитрий Борисович",
@@ -111,6 +114,7 @@ class MechanicsFragment : Fragment() {
                     "12.02.2023",
                     "13.02.2023",
                     "Комментарий",
+                    "",
                     4)
             )))
         addMechanic(Mechanic(
@@ -129,6 +133,7 @@ class MechanicsFragment : Fragment() {
                     "12.02.2023",
                     "13.02.2023",
                     "Комментарий",
+                    "",
                     3),
                 Order("Заказ 2",
                     "Соколов Дмитрий Борисович",
@@ -142,6 +147,7 @@ class MechanicsFragment : Fragment() {
                     "12.02.2023",
                     "13.02.2023",
                     "Комментарий",
+                    "",
                     4)
             )))
     }

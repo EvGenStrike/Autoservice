@@ -1,6 +1,7 @@
 package com.example.autoservice.ui.orders
 
 import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.getValue
 
 data class Order(
     val orderName: String,
@@ -15,6 +16,7 @@ data class Order(
     val startWorkDate: String,
     val endWorkDate: String,
     val comment: String,
+    val report: String = "",
     var starsCount: Int = 0,
     var orderType: OrderType = OrderType.Current
 ) : java.io.Serializable {
@@ -28,6 +30,7 @@ data class Order(
         "",
         "",
         0.0,
+        "",
         "",
         "",
         "",
@@ -50,6 +53,7 @@ data class Order(
         startWorkDate = dataSnapshot.child("startWorkDate").getValue(String::class.java) ?: "",
         endWorkDate = dataSnapshot.child("endWorkDate").getValue(String::class.java) ?: "",
         comment = dataSnapshot.child("comment").getValue(String::class.java) ?: "",
+        report = dataSnapshot.child("report").getValue(String::class.java) ?: "",
         starsCount = dataSnapshot.child("starsCount").getValue(Int::class.java) ?: 0,
         orderType = OrderType.valueOf(
             dataSnapshot.child("orderType").getValue(String::class.java) ?: "Current"

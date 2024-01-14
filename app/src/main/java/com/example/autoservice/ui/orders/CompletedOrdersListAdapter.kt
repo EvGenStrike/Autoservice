@@ -1,6 +1,7 @@
 package com.example.autoservice.ui.orders
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,10 @@ import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.allViews
+import androidx.navigation.findNavController
 import com.example.autoservice.R
 
 class CompletedOrdersListAdapter(
@@ -47,9 +51,22 @@ class CompletedOrdersListAdapter(
                     else View.GONE
             }
         }
+
+        val reportButton: AppCompatButton =
+            convertView.findViewById<AppCompatButton>(R.id.report_button)
+        reportButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("report", ordersList[position].report)
+            convertView?.findNavController()?.navigate(R.id.action_orderFragment_to_reportFragment, bundle)
+        }
+
+        val mechanicName: TextView = convertView.findViewById(R.id.mechanics_name_text)
+        mechanicName.text = ordersList[position].responsibleName
+
         val ratingBar: ProgressBar =
             convertView.findViewById<ProgressBar>(R.id.completed_order_rating)
         ratingBar.progress = ordersList[position].starsCount
+
         val curOrder = ordersList[position]
         val orderTextViews = convertView.allViews.filterIsInstance<TextView>()
             .filter { view ->
