@@ -5,7 +5,7 @@ import com.google.firebase.database.getValue
 
 data class Order(
     val orderName: String,
-    val responsibleName: String,
+    var responsibleName: String,
     val clientName: String,
     val carModel: String,
     val carNumber: String,

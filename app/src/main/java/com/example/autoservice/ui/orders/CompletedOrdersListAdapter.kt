@@ -95,7 +95,7 @@ class CompletedOrdersListAdapter(
         }
         val countOrdersText: TextView =
             convertView.findViewById(R.id.order_number_text) as TextView
-        countOrdersText.text = "Заказ №%s".format(position + 1)
+        countOrdersText.text = ordersList[position].orderName
 
         return convertView
     }

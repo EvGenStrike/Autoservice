@@ -4,18 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.autoservice.databinding.FragmentOrdersBinding
+import com.example.autoservice.ui.mechanics.Mechanic
+import com.example.autoservice.ui.mechanics.MechanicsExpandableListViewAdapter
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.lang.Exception
+import java.util.Dictionary
 import java.util.Objects
 
 class OrdersFragment : Fragment() {
@@ -26,6 +30,7 @@ class OrdersFragment : Fragment() {
     private lateinit var parentRecyclerView: RecyclerView
     private lateinit var loadText: TextView
     private lateinit var dbRef: DatabaseReference
+    private lateinit var mechanicsDict: HashMap<String?, Mechanic?>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +41,7 @@ class OrdersFragment : Fragment() {
         setExpandableViewOnOrders(binding)
         val root: View = binding.root
         val ordersTableRef = FirebaseDatabase.getInstance().reference.child("Order")
+        val mechanicsTableRef = FirebaseDatabase.getInstance().reference.child("Mechanics")
 
         val modelsCurrentOrdersList = ArrayList<CurrentOrderViewModel>()
         val newOrdersList = ArrayList<Order>()
@@ -46,17 +52,40 @@ class OrdersFragment : Fragment() {
             completedOrdersList,
             modelsCurrentOrdersList
         )
-
-        setDBListeners(
-            ordersTableRef,
-            modelsCurrentOrdersList,
-            newOrdersList,
-            completedOrdersList,
-            adapterNewOrders,
-            adapterCompletedOrders
-        )
+        fillMechanics(mechanicsTableRef) {
+            setDBListeners(
+                ordersTableRef,
+                modelsCurrentOrdersList,
+                newOrdersList,
+                completedOrdersList,
+                adapterNewOrders,
+                adapterCompletedOrders
+            )
+        }
 
         return root
+    }
+
+    private fun fillMechanics(
+        mechanicsTableRef: DatabaseReference,
+        callback: () -> Unit
+    ) {
+        mechanicsDict = HashMap()
+        mechanicsTableRef.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (ds in dataSnapshot.children) {
+                        val mechanic: Mechanic? = ds.getValue(Mechanic::class.java)
+                        mechanicsDict[ds.key] = mechanic
+                    }
+                    // Вызовем callback после завершения получения данных
+                    callback.invoke()
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Обработка ошибок
+                }
+            })
     }
 
     fun setExpandableViewOnOrders(
@@ -99,6 +128,11 @@ class OrdersFragment : Fragment() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (ds in dataSnapshot.children) {
                         val order: Order? = ds.getValue(Order::class.java)
+                        for (mechanic in mechanicsDict) {
+                            if (order?.userId == mechanic.key) {
+                                order?.responsibleName = mechanic.value?.getFullName().toString()
+                            }
+                        }
                         when (order?.orderType) {
                             OrderType.Current -> modelsCurrentOrdersList.add(
                                 CurrentOrderViewModel(
