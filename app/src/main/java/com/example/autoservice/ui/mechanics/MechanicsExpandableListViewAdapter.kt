@@ -20,7 +20,7 @@ class MechanicsExpandableListViewAdapter internal constructor(
     }
 
     override fun getChildrenCount(groupPosition: Int): Int {
-        return this.mechanicsList[groupPosition].getOrders().size
+        return this.mechanicsList[groupPosition].orders.size
     }
 
     override fun getGroup(groupPosition: Int): Any {
@@ -28,7 +28,7 @@ class MechanicsExpandableListViewAdapter internal constructor(
     }
 
     override fun getChild(groupPosition: Int, childPosition: Int): Any {
-        return this.mechanicsList[groupPosition].getOrders()[childPosition]
+        return this.mechanicsList[groupPosition].orders[childPosition]
     }
 
     override fun getGroupId(groupPosition: Int): Long {

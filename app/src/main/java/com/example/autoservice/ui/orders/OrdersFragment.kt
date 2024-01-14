@@ -59,7 +59,7 @@ class OrdersFragment : Fragment() {
         return root
     }
 
-    private fun setExpandableViewOnOrders(
+    fun setExpandableViewOnOrders(
         binding: FragmentOrdersBinding
     ) {
         val completedOrders = binding.completedOrdersCardView
@@ -86,7 +86,7 @@ class OrdersFragment : Fragment() {
         }
     }
 
-    private fun setDBListeners(
+    fun setDBListeners(
         ordersTableRef: DatabaseReference,
         modelsCurrentOrdersList: ArrayList<CurrentOrderViewModel>,
         newOrdersList: ArrayList<Order>,
@@ -124,7 +124,7 @@ class OrdersFragment : Fragment() {
             })
     }
 
-    private fun updateViewAfterGetValuesFromDB(
+    fun updateViewAfterGetValuesFromDB(
         adapterNewOrders: NewOrdersListAdapter?,
         adapterCompletedOrders: CompletedOrdersListAdapter?,
         newOrdersList: ArrayList<Order>
