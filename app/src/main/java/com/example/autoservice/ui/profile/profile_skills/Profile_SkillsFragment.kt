@@ -14,7 +14,6 @@ import com.example.autoservice.databinding.FragmentProfileSkillsBinding
 import com.example.autoservice.ui.orders.SkillsAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-//ПОМЕНЯТЬ ID В XML ДЛЯ НАВЫКОВ И МЕХАНИКОВ, СДЕЛАТЬ LISTVIEW ДЛЯ НАВЫКОВ И МЕХАНИКОВ
 
 class Profile_SkillsFragment : Fragment(), AdapterView.OnItemClickListener, NewSkillDialogListener{
     private var _binding: FragmentProfileSkillsBinding? = null
