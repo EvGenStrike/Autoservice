@@ -116,7 +116,7 @@
             android:textAlignment="center"
             android:textSize="30sp"
             android:textColor="@color/black"
-            android:text="Загрузка данных из базы данных..."
+            android:text="Загрузка данных..."
             app:layout_constraintTop_toBottomOf="@id/new_orders_card_view"
             app:layout_constraintBottom_toTopOf="@id/completed_orders_card_view"/>
 
@@ -145,7 +145,8 @@
             app:layout_constraintTop_toBottomOf="@+id/parent_recycler_view"
             app:layout_constraintHeight_min="80dp"
             app:strokeColor="#E6D21F"
-            app:strokeWidth="3dp">
+            app:strokeWidth="3dp"
+            >
 
             <LinearLayout
                 android:id="@+id/completed_orders_linear_layout"
@@ -175,10 +176,10 @@
                 android:id="@+id/completed_orders_expandable_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="100dp"
                 android:layout_marginTop="70dp"
                 android:background="#CFCFCF"
-                android:visibility="gone">
+                android:visibility="gone"
+                >
 
                 <ListView
                     android:id="@+id/completed_orders_list"
@@ -186,7 +187,8 @@
                     android:layout_height="wrap_content"
                     android:divider="#D2C018"
                     android:dividerHeight="2sp"
-                    android:nestedScrollingEnabled="true" />
+                    android:nestedScrollingEnabled="true"
+                    />
 
 
             </LinearLayout>

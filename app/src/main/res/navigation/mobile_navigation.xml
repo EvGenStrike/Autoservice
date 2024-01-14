@@ -6,10 +6,21 @@
     app:startDestination="@+id/navigation_orders">
 
     <fragment
+        android:id="@+id/report_order"
+        android:name="com.example.autoservice.ui.orders.ReportFragment"
+        android:label="Отчёт"
+        tools:layout="@layout/fragment_report"
+        />
+
+    <fragment
         android:id="@+id/navigation_orders"
         android:name="com.example.autoservice.ui.orders.OrdersFragment"
         android:label="@string/title_orders"
-        tools:layout="@layout/fragment_orders" />
+        tools:layout="@layout/fragment_orders">
+        <action
+            android:id="@+id/action_orderFragment_to_reportFragment"
+            app:destination="@id/report_order" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_mechanics"

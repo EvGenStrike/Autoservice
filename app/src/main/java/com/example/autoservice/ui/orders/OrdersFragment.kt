@@ -76,6 +76,9 @@ class OrdersFragment : Fragment() {
         }
 
         completedOrders.setOnClickListener {
+            binding.ordersMainScrollView.post {
+                binding.ordersMainScrollView.fullScroll(View.FOCUS_DOWN)
+            }
             val visibilityExpandableLayout =
                 if (binding.completedOrdersExpandableLayout.visibility == View.GONE) View.VISIBLE
                 else View.GONE
@@ -128,6 +131,7 @@ class OrdersFragment : Fragment() {
     ) {
         adapterNewOrders?.notifyDataSetChanged()
         adapterCompletedOrders?.notifyDataSetChanged()
+        parentRecyclerView.adapter?.notifyDataSetChanged()
 
         binding.newOrdersCountText.text = newOrdersList.size.toString()
         loadText.visibility = View.INVISIBLE
