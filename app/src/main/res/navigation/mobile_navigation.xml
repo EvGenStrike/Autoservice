@@ -13,6 +13,13 @@
         />
 
     <fragment
+        android:id="@+id/add_report_order"
+        android:name="com.example.autoservice.ui.orders.AddReportFragment"
+        android:label="Создать отчёт"
+        tools:layout="@layout/fragment_add_report"
+        />
+
+    <fragment
         android:id="@+id/navigation_orders"
         android:name="com.example.autoservice.ui.orders.OrdersFragment"
         android:label="@string/title_orders"
@@ -20,6 +27,9 @@
         <action
             android:id="@+id/action_orderFragment_to_reportFragment"
             app:destination="@id/report_order" />
+        <action
+            android:id="@+id/action_orderFragment_to_addReportFragment"
+            app:destination="@id/add_report_order" />
     </fragment>
 
     <fragment
