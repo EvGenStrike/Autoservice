@@ -14,15 +14,29 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.autoservice.R
 import com.example.autoservice.ui.mechanics.Mechanic
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class Profile_OrderAdapter(
     private val context: Context,
     private val ordersList: ArrayList<Order>,
+    private val mechanicsList: ArrayList<Mechanic>,
     private val onItemClickListener: OnItemClickListener? = null
 ) : RecyclerView.Adapter<Profile_OrderAdapter.Profile_OrderViewHolder>() {
+    private var onResponsibleSelectedListener: OnResponsibleSelectedListener? = null
+
+    interface OnResponsibleSelectedListener {
+        fun onResponsibleSelected(order: Order, mechanicName: String)
+    }
 
     interface OnItemClickListener {
         fun onItemClick(order: Order)
+    }
+
+    fun setOnResponsibleSelectedListener(listener: OnResponsibleSelectedListener) {
+        this.onResponsibleSelectedListener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Profile_OrderViewHolder {
@@ -34,7 +48,6 @@ class Profile_OrderAdapter(
     override fun onBindViewHolder(holder: Profile_OrderViewHolder, position: Int) {
         val order = ordersList[position]
         holder.bind(order)
-
         holder.cardView.setOnClickListener {
             val visibilityExpandableLayout =
                 if (holder.expandableLayout.visibility == View.GONE) View.VISIBLE
@@ -61,7 +74,8 @@ class Profile_OrderAdapter(
             orderDescriptionTextView.text = order.descriptionProblem
 
             setupMaterialCardView(itemView as FrameLayout)
-            setupChooseMechanicButton(itemView as FrameLayout)
+            setupChooseMechanicButton(itemView as FrameLayout, adapterPosition)
+
         }
     }
 
@@ -77,42 +91,54 @@ class Profile_OrderAdapter(
         }
     }
 
-    private fun setupChooseMechanicButton(frameLayout: FrameLayout) {
+    private fun setupChooseMechanicButton(frameLayout: FrameLayout, position: Int) {
         //временный массив, потом будут браться из бд
-        val mechanicList: ArrayList<Mechanic> = arrayListOf(
-            Mechanic(
-                "Иван", "Иванов", "Иванович",
-                "+79001989301", 5),
-            Mechanic(
-                "Дмитрий", "Мартынов", "Борисович",
-                "+793247118503", 3),
-            Mechanic(
-                "Дмитрий", "Соколов", "Борисович",
-                "+79385019571", 4)
-        )
-
         val button: AppCompatButton = frameLayout.findViewById(R.id.profile_fragment_choose_mechanic_button)
+
+        val order = ordersList[position]
+        val responsibleName = order.responsibleName
+        if (responsibleName.isNotEmpty()){
+            button.text = responsibleName
+        }
 
         button.setOnClickListener {
             // Создаем всплывающее меню
             val popupMenu = PopupMenu(context, button)
 
             // Наполняем меню элементами из списка механиков
-            for (mechanic in mechanicList) {
+            for (mechanic in mechanicsList) {
                 popupMenu.menu.add(mechanic.getFullName())
             }
-
+            var i = 0
             // Устанавливаем слушатель выбора элемента в меню
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 // Обрабатываем выбор элемента
                 // В данном случае, вы можете выполнить действие в зависимости от выбранного механика
                 // например, вы можете передать выбранного механика обратно в активность или фрагмент
                 button.text = menuItem.title
+
+                setResponsible(menuItem.title.toString(), position)
                 true // возвращаем true, чтобы не закрывать меню после выбора
             }
 
             // Показываем всплывающее меню
             popupMenu.show()
+        }
+    }
+
+    private fun setResponsible(mechanicName: String, position: Int) {
+        var requiredMechanic: Mechanic? = null
+        for (mechanic in mechanicsList) {
+            if (mechanic.getFullName() == mechanicName) {
+                requiredMechanic = mechanic
+                break
+            }
+        }
+
+        requiredMechanic?.let {
+            onResponsibleSelectedListener?.onResponsibleSelected(
+                ordersList[position],
+                it.getFullName())
         }
     }
 

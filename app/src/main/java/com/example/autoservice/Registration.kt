@@ -95,7 +95,7 @@ class Registration: AppCompatActivity() {
                             userEmail.text.clear()
                             userPhone.text.clear()
 
-                            saveUserToken(userId)
+                            saveUserToken(userId, userName.text.toString())
 
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
@@ -115,7 +115,7 @@ class Registration: AppCompatActivity() {
         }
     }
 
-    private fun saveUserToken(userId: String?) {
+    private fun saveUserToken(userId: String?, userName: String) {
         // Сохранение токена в SharedPreferences или другом месте для последующего использования
         val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
