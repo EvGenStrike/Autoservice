@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.allViews
 import androidx.recyclerview.widget.RecyclerView
 import com.example.autoservice.R
@@ -28,7 +29,7 @@ class OrderAdapter(mList: List<CurrentOrderViewModel>) :
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val model: CurrentOrderViewModel = mList[position]
-        holder.orderTitle.text = "Заказ №%s".format(position + 1)
+        holder.orderTitle.text = mList[position].currentOrder.orderName
         curOrder = model.currentOrder
         Order::class.java.declaredFields.forEach { field ->
             field.isAccessible = true
