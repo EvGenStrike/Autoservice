@@ -1,5 +1,7 @@
 package com.example.autoservice
 
+import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 
@@ -25,6 +27,19 @@ class User(
         email = dataSnapshot.child("email").getValue(String::class.java) ?: "",
         phone = dataSnapshot.child("phone").getValue(String::class.java) ?: ""
     )
+
+    companion object {
+        fun getUserId(context: Context): String?{
+            val sharedPreferences = context.getSharedPreferences(
+                "user_prefs", AppCompatActivity.MODE_PRIVATE)
+            val userId = sharedPreferences.getString("user_id", "")
+            return userId
+        }
+
+        fun isUserMechanic(context: Context): Boolean{
+            return getUserId(context) != "-Nms_HXQ6e_YjxMJf-uP"
+        }
+    }
 
 }
 class Table(val indexId: String,val text1: String, val text2: String, val text3: String) {

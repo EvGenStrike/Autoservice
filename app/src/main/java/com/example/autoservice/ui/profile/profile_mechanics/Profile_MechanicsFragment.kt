@@ -194,10 +194,10 @@ class Profile_MechanicsFragment : Fragment(), AdapterView.OnItemClickListener,
         // Update the responsible mechanic field
         orderRef.child("userId").setValue(userId)
             .addOnSuccessListener {
-                Toast.makeText(requireActivity(), "$orderNameInDB assigned to $userId", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Механик успешно назначен", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
-                Toast.makeText(requireActivity(), "Failed to assign mechanic", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Произошла ошибка", Toast.LENGTH_SHORT).show()
             }
     }
 

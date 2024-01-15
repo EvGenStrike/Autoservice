@@ -129,7 +129,7 @@ class Registration: AppCompatActivity() {
         val userId = sharedPreferences.getString("user_id", null)
 
         // Проверка наличия токена и автоматическая аутентификация
-        if (userId != null) {
+        if (userId != null && userId != "") {
             // Автоматическая аутентификация с использованием токена
             // Например, firebaseAuth.signInWithCustomToken(token)
             val intent = Intent(this, MainActivity::class.java)

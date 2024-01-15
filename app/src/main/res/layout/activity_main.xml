@@ -34,6 +34,18 @@
             />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/bottom_line_for_fragments"
+        android:layout_width="0sp"
+        android:layout_height="60sp"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+    </TextView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_view"
         android:layout_width="0dp"
@@ -49,13 +61,28 @@
         app:itemIconSize="35sp"
         />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav_view_for_mechanic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/nav_menu_background_color"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu_for_mechanic"
+        app:itemBackground="@drawable/selector_bottom_nav_menu"
+        app:itemIconSize="35sp"
+        />
+
     <fragment
         android:id="@+id/nav_host_fragment_activity_main"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_line_for_fragments"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linear_layout_logo"

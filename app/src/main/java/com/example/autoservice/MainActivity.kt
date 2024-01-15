@@ -2,6 +2,7 @@ package com.example.autoservice
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.ActionBar
@@ -27,14 +28,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setupNavView(){
-        val bottomNavigationView: BottomNavigationView = binding.bottomNavView
+        var setOfScreens: Set<Int>
+        val bottomNavigationView: BottomNavigationView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
+
+        if (!User.isUserMechanic(this)){
+            setOfScreens = setOf(
                 R.id.navigation_orders,
                 R.id.navigation_mechanics,
                 R.id.navigation_profile
             )
+            binding.bottomNavViewForMechanic.visibility = View.GONE
+            bottomNavigationView = binding.bottomNavView
+        }
+        else{
+            setOfScreens = setOf(
+                R.id.navigation_orders,
+                R.id.navigation_profile
+            )
+            binding.bottomNavView.visibility = View.GONE
+            bottomNavigationView = binding.bottomNavViewForMechanic
+        }
+        val appBarConfiguration = AppBarConfiguration(
+            setOfScreens
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)

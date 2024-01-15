@@ -16,11 +16,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.autoservice.MainActivity
 import com.example.autoservice.R
+import com.example.autoservice.Registration
 import com.example.autoservice.User
 import com.example.autoservice.databinding.FragmentProfileBinding
 import com.example.autoservice.ui.orders.Order
@@ -65,9 +68,31 @@ class ProfileFragment : Fragment() {
         setImageViewOnClick(binding.profileFragmentProfilePicture)
         setListView(binding.profileFragmentAvailableButtonsListView)
 
-        val transparentBackground = binding.profileFragmentBackround
+        val logoutButton = binding.profileFragmentLogoutButton
+        setupLogoutButton(logoutButton)
 
         return root
+    }
+
+    private fun setupLogoutButton(logoutButton: AppCompatButton) {
+        logoutButton.setOnClickListener {
+            deleteUserToken()
+            goBackToAuth()
+        }
+    }
+
+    private fun deleteUserToken() {
+        // Сохранение токена в SharedPreferences или другом месте для последующего использования
+        val sharedPreferences = requireContext()
+            .getSharedPreferences("user_prefs", AppCompatActivity.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+    }
+
+    private fun goBackToAuth(){
+        val intent = Intent(requireContext(), Registration::class.java)
+        startActivity(intent)
     }
 
     fun setupUserName(
