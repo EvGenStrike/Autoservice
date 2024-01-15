@@ -129,7 +129,11 @@ class OrdersFragment : Fragment() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (ds in dataSnapshot.children) {
                         val order: Order? = ds.getValue(Order::class.java)
-
+                        for(mechanic in mechanicsDict) {
+                            if (order?.userId == mechanic.key) {
+                                order?.responsibleName = mechanic.value?.getFullName().toString()
+                            }
+                        }
                         if (order?.userId == User.getUserId(requireContext())){
                             when (order?.orderType) {
                                 OrderType.Current -> modelsCurrentOrdersList.add(
