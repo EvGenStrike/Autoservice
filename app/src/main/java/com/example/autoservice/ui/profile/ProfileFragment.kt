@@ -26,6 +26,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
 import com.example.autoservice.MainActivity
 import com.example.autoservice.R
 import com.example.autoservice.Registration
@@ -146,13 +147,6 @@ class ProfileFragment : Fragment() {
             })
     }
 
-    private fun getUserId(): String?{
-        val sharedPreferences = requireContext().getSharedPreferences(
-            "user_prefs", AppCompatActivity.MODE_PRIVATE)
-        val userId = sharedPreferences.getString("user_id", "")
-        return userId
-    }
-
     private fun setListView(listView: ListView){
         var availableButtons = ArrayList<String>()
         if (!User.isUserMechanic(requireContext())){
@@ -206,7 +200,7 @@ class ProfileFragment : Fragment() {
     }
 
     // Метод для открытия галереи
-    private fun openGallery() {
+    fun openGallery() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
