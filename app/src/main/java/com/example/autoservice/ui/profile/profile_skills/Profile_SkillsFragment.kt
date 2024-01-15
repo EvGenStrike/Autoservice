@@ -11,13 +11,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.autoservice.databinding.FragmentProfileSkillsBinding
+import com.example.autoservice.ui.mechanics.Mechanic
+import com.example.autoservice.ui.orders.Order
 import com.example.autoservice.ui.orders.SkillsAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class Profile_SkillsFragment : Fragment(), AdapterView.OnItemClickListener, NewSkillDialogListener{
     private var _binding: FragmentProfileSkillsBinding? = null
     private val binding get() = _binding!!
+
+    private var ordersList: ArrayList<Order> = ArrayList()
+    private var mechanicsList: ArrayList<Mechanic> = ArrayList()
 
     private var skillsList: ArrayList<Skill> = arrayListOf(
     Skill("Краска машины", "Умею быстро красить машину, используя минимум краски"),
@@ -35,6 +44,9 @@ class Profile_SkillsFragment : Fragment(), AdapterView.OnItemClickListener, NewS
         // Включение кнопки "назад" в тулбаре
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true);
+
+        getMechanics()
+        getOrders()
 
         setupSkillsRecyclerView()
         setupFab()
@@ -93,6 +105,44 @@ class Profile_SkillsFragment : Fragment(), AdapterView.OnItemClickListener, NewS
     override fun onSkillAdded(skillName: String, skillDescription: String) {
         skillsList.add(Skill(skillName, skillDescription))
         updateSkills()
+    }
+
+    private fun getMechanics() {
+        val mechanicsTableRef = FirebaseDatabase.getInstance().reference.child("Mechanics")
+        mechanicsTableRef.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (ds in dataSnapshot.children) {
+                        val mechanic: Mechanic? = ds.getValue(Mechanic::class.java)
+                        if (mechanic != null) {
+                            mechanicsList.add(mechanic)
+                        }
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    //handle databaseError
+                }
+            })
+    }
+
+    fun getOrders() {
+        val ordersTableRef = FirebaseDatabase.getInstance().reference.child("Orders")
+        ordersTableRef.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (ds in dataSnapshot.children) {
+                        val order: Order? = ds.getValue(Order::class.java)
+                        if (order != null) {
+                            ordersList.add(order)
+                        }
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    //handle databaseError
+                }
+            })
     }
 
 }

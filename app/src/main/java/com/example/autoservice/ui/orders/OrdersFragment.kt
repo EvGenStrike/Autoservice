@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.autoservice.User
 import com.example.autoservice.databinding.FragmentOrdersBinding
 import com.example.autoservice.ui.mechanics.Mechanic
 import com.example.autoservice.ui.mechanics.MechanicsExpandableListViewAdapter
@@ -128,20 +129,18 @@ class OrdersFragment : Fragment() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (ds in dataSnapshot.children) {
                         val order: Order? = ds.getValue(Order::class.java)
-                        for (mechanic in mechanicsDict) {
-                            if (order?.userId == mechanic.key) {
-                                order?.responsibleName = mechanic.value?.getFullName().toString()
-                            }
-                        }
-                        when (order?.orderType) {
-                            OrderType.Current -> modelsCurrentOrdersList.add(
-                                CurrentOrderViewModel(
-                                    order
+
+                        if (order?.userId == User.getUserId(requireContext())){
+                            when (order?.orderType) {
+                                OrderType.Current -> modelsCurrentOrdersList.add(
+                                    CurrentOrderViewModel(
+                                        order
+                                    )
                                 )
-                            )
-                            OrderType.New -> newOrdersList.add(order)
-                            OrderType.Completed -> completedOrdersList.add(order)
-                            else -> {}
+                                OrderType.New -> newOrdersList.add(order)
+                                OrderType.Completed -> completedOrdersList.add(order)
+                                else -> {}
+                            }
                         }
 
                     }

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment"
     android:background="#474747"
+    android:id="@+id/profile_fragment_backround"
     >
 
     <RelativeLayout
@@ -51,7 +52,7 @@
             android:id="@+id/profile_fragment_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Иванов Иван"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_profile_fragment"
             android:layout_alignParentBottom="true"

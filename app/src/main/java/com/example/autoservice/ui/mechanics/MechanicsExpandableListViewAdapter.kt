@@ -56,7 +56,6 @@ class MechanicsExpandableListViewAdapter internal constructor(
             val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = inflater.inflate(R.layout.mechanics_list_item, null)
         }
-
         val mechanicNameTextView = convertView!!.findViewById<TextView>(R.id.mechanics_list_item_name)
         mechanicNameTextView.setText(mechanic.getFullName())
 
