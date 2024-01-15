@@ -128,7 +128,13 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setListView(listView: ListView){
-        val availableButtons = arrayListOf("Навыки", "Новые заказы")
+        var availableButtons = ArrayList<String>()
+        if (!User.isUserMechanic(requireContext())){
+            availableButtons = arrayListOf("Навыки", "Новые заказы")
+        }
+        else {
+            availableButtons = arrayListOf("Навыки")
+        }
 
         val listViewAdapter = ArrayAdapter(
             requireContext(),

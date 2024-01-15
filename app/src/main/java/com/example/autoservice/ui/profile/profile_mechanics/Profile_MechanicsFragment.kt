@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.autoservice.databinding.FragmentProfileMechanicsBinding
 import com.example.autoservice.ui.mechanics.Mechanic
 import com.example.autoservice.ui.orders.Order
+import com.example.autoservice.ui.orders.OrderType
 import com.example.autoservice.ui.orders.Profile_OrderAdapter
 import com.example.autoservice.ui.profile.profile_mechanics.MechanicDialogListener
 import com.google.firebase.database.DataSnapshot
@@ -94,10 +95,15 @@ class Profile_MechanicsFragment : Fragment(), AdapterView.OnItemClickListener,
 
     fun updateSkills() {
         val ordersRecyclerView: RecyclerView = binding.profileFragmentOrdersRecyclerView
-
+        val rightOrders = ArrayList<Order>()
+        for (order in ordersList){
+            if (order.orderType != OrderType.Completed){
+                rightOrders.add(order)
+            }
+        }
         val recyclerViewAdapter = Profile_OrderAdapter(
             requireContext(),
-            ordersList as ArrayList<Order>,
+            rightOrders as ArrayList<Order>,
             mechanicsList as ArrayList<Mechanic>,
             object : Profile_OrderAdapter.OnItemClickListener {
                 override fun onItemClick(order: Order) {
@@ -184,8 +190,6 @@ class Profile_MechanicsFragment : Fragment(), AdapterView.OnItemClickListener,
     override fun onResponsibleSelected(order: Order, mechanicName: String) {
         // Обновите значение в таблице Order, используя order и mechanicName
         // Например, можно использовать Firebase Database API для этого
-        Toast.makeText(requireActivity(), "${order.orderName} ${mechanicName}", Toast.LENGTH_SHORT).show()
-
         val orderNameInDB = getOrderNameInDB(order)
         val orderRef = FirebaseDatabase.getInstance()
             .reference.child("Order").child(orderNameInDB)

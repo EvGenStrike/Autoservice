@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.autoservice.User
 import com.example.autoservice.databinding.FragmentOrdersBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -99,15 +100,17 @@ class OrdersFragment : Fragment() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (ds in dataSnapshot.children) {
                         val order: Order? = ds.getValue(Order::class.java)
-                        when (order?.orderType) {
-                            OrderType.Current -> modelsCurrentOrdersList.add(
-                                CurrentOrderViewModel(
-                                    order
+                        if (order?.userId == User.getUserId(requireContext())){
+                            when (order?.orderType) {
+                                OrderType.Current -> modelsCurrentOrdersList.add(
+                                    CurrentOrderViewModel(
+                                        order
+                                    )
                                 )
-                            )
-                            OrderType.New -> newOrdersList.add(order)
-                            OrderType.Completed -> completedOrdersList.add(order)
-                            else -> {}
+                                OrderType.New -> newOrdersList.add(order)
+                                OrderType.Completed -> completedOrdersList.add(order)
+                                else -> {}
+                            }
                         }
 
                     }
